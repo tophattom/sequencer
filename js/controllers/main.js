@@ -41,14 +41,17 @@
             return new Array(vm.beats);
         };
         
-        vm.addAudioCell = function(beat, note) {
-            console.log(beat);
+        vm.toggleAudioCell = function(beat, note) {
             if (!vm.audioCells[beat]) {
                 vm.audioCells[beat] = [];
             }
             
-            var newCell = new AudioCell(audioCtx, vm.masterVolume, note.freq);
-            vm.audioCells[beat][note.index] = newCell;
+            if (!vm.audioCells[beat][note.index]) {
+                var newCell = new AudioCell(audioCtx, vm.masterVolume, note.freq);
+                vm.audioCells[beat][note.index] = newCell;
+            } else {
+                vm.audioCells[beat][note.index] = null;
+            }
         };
         
         vm.getAudioCell = function(beat, note) {

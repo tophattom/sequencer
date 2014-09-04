@@ -20,7 +20,7 @@
                 <tbody>
                     <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
                         <td ng-repeat="beat in mainCtrl.getBeats() track by $index"
-                            ng-click="mainCtrl.addAudioCell($index, note)">
+                            ng-click="mainCtrl.toggleAudioCell($index, note)">
                             
                             <div class="cell"
                                 ng-class="{'current-beat': $index === mainCtrl.currentBeat,
