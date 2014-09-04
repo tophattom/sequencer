@@ -5,7 +5,7 @@
         .controller('MainCtrl', MainCtrl);
         
     /* @ngInject */
-    function MainCtrl($interval) {
+    function MainCtrl($interval, $window) {
         var audioCtx = new AudioContext();
         
         var vm = this;
@@ -77,9 +77,10 @@
                 return;
             }
             
-            playAudioCells(vm.currentBeat);
-            vm.player = $interval(update, vm.beatDuration * 1000);
             vm.playing = true;
+            
+            vm.player = $interval(update, vm.beatDuration * 1000);
+            playAudioCells(vm.currentBeat);
         };
         
         var lastUpdate = 0;
@@ -106,5 +107,15 @@
                 cell.stop(vm.beatDuration);
             });
         }
+        
+        $window.addEventListener('keypress', function(event) {
+            if (event.keyCode === 32) {
+                if (vm.playing) {
+                    vm.stop();
+                } else {
+                    vm.start();
+                }
+            }
+        });
     }
 })();
