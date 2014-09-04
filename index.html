@@ -10,37 +10,8 @@
         
         <script src="js/controllers/main.js" charset="utf-8"></script>
         
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
-        
-        <script charset="utf-8">
-            var audioCtx = new AudioContext();
-            
-            var gainNode = audioCtx.createGain();
-            
-            var cells = [];
-            
-            // scale.forEach(function(freq, index) {
-            //     var newCell = new AudioCell(audioCtx, gainNode, freq);
-            //     
-            //     cells.push(newCell);
-            //     
-            //     newCell.onended = function(event) {
-            //         var nextCell = cells[(index + 1) % 8];
-            //         nextCell.start();
-            //         nextCell.stop(1);
-            //     };     
-            // });
-            
-            // cells[0].start();
-            // cells[0].stop(1);
-            
-            
-            
-            gainNode.gain.value = 0.2;
-            
-            gainNode.connect(audioCtx.destination);
-            
-        </script>
     </head>
     
     <body>
@@ -60,6 +31,12 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div id="playback-controls">
+                <a href="#" ng-click="mainCtrl.start()"><i class="fa fa-play fa-2x" ng-class="{'disabled-true': mainCtrl.playing}"></i></a>
+                
+                <a href="#" ng-click="mainCtrl.stop()"><i class="fa fa-stop fa-2x" ng-class="{'disabled-true': !mainCtrl.playing}"></i></a>
+            </div>            
         </div>
     </body>
 </html>

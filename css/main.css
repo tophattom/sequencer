@@ -40,3 +40,30 @@ body {
     
     /*box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), inset 0 0 30px rgba(0, 0, 0, 0.3);*/
 }
+
+#playback-controls {
+    position: absolute;
+    
+    left: 0;
+    bottom: 0;
+    
+    margin: 10px;
+    padding: 10px;
+    
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#playback-controls a {
+    color: white;
+    
+    text-decoration: none;
+}
+
+#playback-controls a:not(:last-child) {
+    margin-right: 10px;
+}
+
+#playback-controls .disabled-true {
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.1);
+}

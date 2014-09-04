@@ -17,6 +17,9 @@
         
         vm.currentBeat = 0;
         
+        vm.playing = false;
+        vm.player = null;
+        
         vm.audioCells = [];
         
         vm.scale = [
@@ -56,9 +59,28 @@
             return vm.audioCells[beat][note.index] ? vm.audioCells[beat][note.index] : null;
         };
         
-        playAudioCells(vm.currentBeat);
+        vm.stop = function() {
+            if (!vm.playing) {
+                return;
+            }
+            
+            $interval.cancel(vm.player);
+            vm.playing = false;
+            vm.currentBeat = 0;
+        };
+        
+        vm.start = function() {
+            if (vm.playing) {
+                return;
+            }
+            
+            playAudioCells(vm.currentBeat);
+            vm.player = $interval(update, vm.beatDuration * 1000);
+            vm.playing = true;
+        };
+        
         var lastUpdate = 0;
-        $interval(function() {
+        function update() {
             vm.currentBeat = (vm.currentBeat + 1);
             
             if (vm.currentBeat >= vm.beats) {
@@ -67,9 +89,9 @@
             playAudioCells(vm.currentBeat);
             
             var now = window.performance.now();
-            console.log(now - lastUpdate);
+            // console.log(now - lastUpdate);
             lastUpdate = now;
-        }, vm.beatDuration * 1000);
+        }
         
         function playAudioCells(beat) {
             if (!vm.audioCells[beat]) {
