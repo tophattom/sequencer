@@ -103,8 +103,10 @@
             }
             
             vm.audioCells[beat].forEach(function(cell) {
-                cell.start();
-                cell.stop(vm.beatDuration);
+                if (cell !== null) {
+                    cell.start();
+                    cell.stop(vm.beatDuration);
+                }
             });
         }
         
