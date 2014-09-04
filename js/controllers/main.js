@@ -33,7 +33,7 @@
             }
         ];
         
-        vm.scale = getScale(vm.scaleDefinitions[0]);
+        vm.scale = getScale(vm.scaleDefinitions[0], -1, 0);
         
         vm.masterVolume = audioCtx.createGain();
         vm.masterVolume.gain.value = 0.2;
@@ -112,10 +112,20 @@
             });
         }
         
-        function getScale(scaleDefinition) {
-            return scaleDefinition.pianoKeys.map(function(number, index) {
+        function getScale(scaleDefinition, startOctave, endOctave) {
+            var scale = [];
+            
+            for (var octave = startOctave; octave <= endOctave; octave++) {                
+                scale = scale.concat(scaleDefinition.pianoKeys.map(function(keyNumber, index) {
+                    return Math.pow(2, (keyNumber + 12 * octave - 49) / 12) * 440;
+                }));
+            }
+                        
+            return scale.filter(function(elem, index) {
+                return scale.indexOf(elem) === index;
+            }).map(function(freq, index) {
                 return {
-                    freq: Math.pow(2, (number - 49) / 12) * 440,
+                    freq: freq,
                     index: index
                 };
             });
