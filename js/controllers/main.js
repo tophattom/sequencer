@@ -22,16 +22,18 @@
         
         vm.audioCells = [];
         
-        vm.scale = [
-            {freq: 440, index: 0},
-            {freq: 493.88, index: 1},
-            {freq: 523.25, index: 2},
-            {freq: 587.33, index: 3},
-            {freq: 659.26, index: 4},
-            {freq: 698.46, index: 5},
-            {freq: 783.99, index: 6},
-            {freq: 880, index: 7}
+        vm.scaleDefinitions = [
+            {
+                scale: 'minor', 
+                pianoKeys: [49, 51, 52, 54, 56, 57, 59, 61]
+            },
+            {
+                scale: 'major',
+                pianoKeys: [49, 51, 53, 54, 56, 58, 60, 61]
+            }
         ];
+        
+        vm.scale = getScale(vm.scaleDefinitions[0]);
         
         vm.masterVolume = audioCtx.createGain();
         vm.masterVolume.gain.value = 0.2;
@@ -107,6 +109,15 @@
                     cell.start();
                     cell.stop(vm.beatDuration);
                 }
+            });
+        }
+        
+        function getScale(scaleDefinition) {
+            return scaleDefinition.pianoKeys.map(function(number, index) {
+                return {
+                    freq: Math.pow(2, (number - 49) / 12) * 440,
+                    index: index
+                };
             });
         }
         
