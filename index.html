@@ -12,31 +12,31 @@
         
         <script src="js/controllers/main.js" charset="utf-8"></script>
         
+        <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        
         <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
     </head>
     
     <body>
         <div id="main-container" ng-controller="MainCtrl as mainCtrl">
             <div id="matrix-container">
-                <div id="sequencer-matrix">
-                    <table cellspacing="0">
-                        <tbody>
-                            <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
-                                <td ng-repeat="beat in mainCtrl.getBeats() track by $index"
-                                    ng-click="mainCtrl.toggleAudioCell($index, note)"
-                                    ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
-                                    
-                                    <div class="cell"
-                                        ng-class="{'current-beat': $index === mainCtrl.currentBeat,
-                                            'on': mainCtrl.getAudioCell($index, note) !== null}">
-                                    </div>
-                                    
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>  
-                </div>
+                <table cellspacing="0" id="sequencer-matrix">
+                    <tbody>
+                        <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
+                            <td ng-repeat="beat in mainCtrl.getBeats() track by $index"
+                                ng-click="mainCtrl.toggleAudioCell($index, note)"
+                                ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
+                                
+                                <div class="cell"
+                                    ng-class="{'current-beat': $index === mainCtrl.currentBeat,
+                                        'on': mainCtrl.getAudioCell($index, note) !== null}">
+                                </div>
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             
             <div id="tools-container">
