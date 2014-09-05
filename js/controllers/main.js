@@ -18,7 +18,8 @@
         vm.bars = 4;
         vm.beatsPerBar = 4;
         
-        vm.beats = 16;
+        vm.beatCount = vm.bars * vm.beatsPerBar;
+        vm.beats = new Array(vm.beatCount); //Dummy array for ng-repeat
         
         vm.currentBeat = 0;
         
@@ -33,8 +34,20 @@
         vm.masterVolume.gain.value = 0.2;
         vm.masterVolume.connect(audioCtx.destination);
         
-        vm.getBeats = function() {
-            return new Array(vm.bars * vm.beatsPerBar);
+        vm.bpmChanged = function() {
+            vm.stop();
+            vm.beatDuration = 60 / vm.bpm;
+        };
+        
+        vm.lengthChanged = function() {
+            var oldBeatCount = vm.beatCount;
+            
+            vm.beatCount = vm.bars * vm.beatsPerBar;
+            vm.beats = new Array(vm.beatCount);
+            
+            if (oldBeatCount > vm.beatCount) {
+                vm.audioCells.splice(vm.beatCount, oldBeatCount - vm.beatCount);
+            }
         };
         
         vm.toggleAudioCell = function(beat, note) {
@@ -85,11 +98,8 @@
         
         var lastUpdate = 0;
         function update() {
-            vm.currentBeat = (vm.currentBeat + 1);
+            vm.currentBeat = (vm.currentBeat + 1) % vm.beatCount;
             
-            if (vm.currentBeat >= vm.beats) {
-                vm.currentBeat = 0;
-            }
             playAudioCells(vm.currentBeat);
             
             var now = window.performance.now();

@@ -24,7 +24,7 @@
                 <table cellspacing="0" id="sequencer-matrix">
                     <tbody>
                         <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
-                            <td ng-repeat="beat in mainCtrl.getBeats() track by $index"
+                            <td ng-repeat="beat in mainCtrl.beats track by $index"
                                 ng-click="mainCtrl.toggleAudioCell($index, note)"
                                 ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
                                 
@@ -40,13 +40,34 @@
             </div>
             
             <div id="tools-container">
-                <div id="playback-controls">
+                <div id="playback-controls" class="control-group">
                     <a href="" ng-click="mainCtrl.start()" ng-class="{'disabled-true': mainCtrl.playing}"><i class="fa fa-play fa-2x"></i></a>
-                    
                     <a href="" ng-click="mainCtrl.stop()" ng-class="{'disabled-true': !mainCtrl.playing}"><i class="fa fa-stop fa-2x"></i></a>
-                    
-                    <a href="" ng-click="mainCtrl.clear()"><i class="fa fa-times fa-2x"></i></a>
                 </div> 
+                
+                <div class="control-group">
+                    <form class="control-form" action="" ng-submit="mainCtrl.lengthChanged()">
+                        <label for="bpm">
+                            BPM:
+                            <input type="number" id="bpm" class="short" ng-model="mainCtrl.bpm" ng-change="mainCtrl.bpmChanged()">
+                        </label>
+                        
+                        <label for="bars">
+                            BARS:
+                            <input type="number" id="bars" class="short" ng-model="mainCtrl.bars">    
+                        </label>
+                        
+                        <label for="beats-per-bar">
+                            BEATS / BAR:
+                            <input type="number" id="beats-per-bar" class="short" ng-model="mainCtrl.beatsPerBar">
+                        </label>      
+                        
+                        <input type="submit" class="hidden">                  
+                    </form>    
+                </div>
+                
+                
+                <a href="" ng-click="mainCtrl.clear()"><i class="fa fa-times fa-2x"></i></a>
             </div>
         </div>
     </body>

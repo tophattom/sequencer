@@ -6,6 +6,12 @@ body {
     font-weight: 300;
     
     background: #23223D;
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
 }
 
 
@@ -61,21 +67,56 @@ body {
     background: #616098;
 }
 
-#playback-controls {
-    color: white;
-}
-
-#playback-controls a {
-    color: white;
-    
-    text-decoration: none;
-}
-
 #playback-controls a:not(:last-child) {
     margin-right: 10px;
 }
 
-#playback-controls .disabled-true {
+a.disabled-true {
     pointer-events: none;
     color: rgba(255, 255, 255, 0.1);
+}
+
+.control-group {
+    padding-right: 15px;
+    margin-right: 10px;
+    
+    border-right: 2px solid white;     
+}
+
+
+.control-form {
+    display: inline;
+    
+    margin: 0;
+    padding: 0;
+}
+
+.control-form input {
+    margin: 0;
+    
+    padding: 2px 6px;
+    
+    font-family: Oswald, Helvetica, sans-serif;
+    font-size: 11pt;
+    
+    background: transparent;
+    color: white;
+    
+    border: 2px solid white;
+}
+
+.control-form label:not(:first-of-type) {
+    margin-left: 10px;
+}
+
+.control-form label input {
+    margin-left: 5px;
+}
+
+.control-form input.short {
+    width: 60px;
+}
+
+.control-form input.hidden {
+    display: none;
 }
