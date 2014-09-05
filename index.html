@@ -47,7 +47,7 @@
                 </div> 
                 
                 <div class="control-group">
-                    <form class="control-form" action="" ng-submit="mainCtrl.lengthChanged()">
+                    <form class="control-form" ng-submit="mainCtrl.lengthChanged()">
                         <label for="bpm">
                             BPM:
                             <input type="number" id="bpm" class="short" ng-model="mainCtrl.bpm" ng-change="mainCtrl.bpmChanged()">
@@ -65,6 +65,35 @@
                         
                         <input type="submit" class="hidden">                  
                     </form>    
+                </div>
+                
+                <div class="control-group">
+                    <form class="control-form">
+                        <label for="scale-key">
+                            SCALE:
+                            <select id="scale-key" ng-model="mainCtrl.newScale.key"
+                                ng-options="scale.key as scale.name for scale in mainCtrl.availableScales | orderBy:'name'">
+                                
+                            </select>
+                        </label>
+                        
+                        <label for="scale-start-note-name">
+                            KEY:
+                            <input type="text" id="scale-start-note-name" class="short" ng-model="mainCtrl.newScale.startNote.name" required>
+                        </label>
+                        
+                        <label for="scale-start-note-octave">
+                            OCTAVE:
+                            <input type="number" id="scale-start-note-octave" class="short" ng-model="mainCtrl.newScale.startNote.octave" required>
+                        </label>
+                        
+                        <label for="scale-octaves">
+                            # OCTAVES:
+                            <input type="number" id="scale-octaves" class="short" ng-model="mainCtrl.newScale.octaves">
+                        </label>
+                        
+                        <button type="submit">GENERATE</button>
+                    </form>
                 </div>
                 
                 

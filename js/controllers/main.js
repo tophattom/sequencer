@@ -28,11 +28,21 @@
         
         vm.audioCells = [];
         
+        vm.availableScales = scaleService.getAvailableScales();
         vm.scale = scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2);
         
         vm.masterVolume = audioCtx.createGain();
         vm.masterVolume.gain.value = 0.2;
         vm.masterVolume.connect(audioCtx.destination);
+        
+        vm.newScale = {
+            key: 'minor',
+            startNote: {
+                name: 'A',
+                octave: 3
+            },
+            octaves: 2
+        };
         
         vm.bpmChanged = function() {
             vm.stop();
