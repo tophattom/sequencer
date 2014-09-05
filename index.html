@@ -31,6 +31,7 @@
                                 <div class="cell"
                                     ng-class="{'current-beat': $index === mainCtrl.currentBeat,
                                         'on': mainCtrl.getAudioCell($index, note) !== null}">
+                                    <span class="note-name">{{note.name}}</span>
                                 </div>
                                 
                             </td>
