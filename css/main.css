@@ -9,6 +9,24 @@ body {
 }
 
 
+#tools-container {
+    display: flex;
+    align-items: center;
+    
+    height: 40px;
+    
+    padding: 0 20px;
+    
+    box-sizing: border-box;
+    
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#matrix-container {
+    height: calc(100% - 40px);
+}
+
+
 #sequencer-matrix table {
     width: 100%;
     height: 100%;
@@ -24,18 +42,15 @@ body {
 }
 
 .bar-even {
-    background: #161528;
+    /*background: #161528;*/
+    background: rgba(0, 0, 0, 0.2);
 }
 
 #sequencer-matrix .cell {
     width: 100%;
     height: 100%;
-    
-    /*border-radius: 15%;*/
         
     background: #2E2D4C;
-    
-    /*box-shadow: 0 0 10px rgba(255, 255, 255, 0.15), inset 0 0 30px rgba(0, 0, 0, 0.3);*/
 }
 
 #sequencer-matrix .cell.current-beat {
@@ -44,22 +59,10 @@ body {
 
 #sequencer-matrix .cell.on {
     background: #616098;
-    
-    /*box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), inset 0 0 30px rgba(0, 0, 0, 0.3);*/
 }
 
 #playback-controls {
-    position: absolute;
-    
-    left: 0;
-    bottom: 0;
-    
-    margin: 10px;
-    padding: 10px;
-        
     color: white;
-    
-    background: rgba(0, 0, 0, 0.4);
 }
 
 #playback-controls a {
