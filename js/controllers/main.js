@@ -5,7 +5,7 @@
         .controller('MainCtrl', MainCtrl);
         
     /* @ngInject */
-    function MainCtrl($interval, $window) {
+    function MainCtrl($interval, $window, scaleService) {
         var audioCtx = new AudioContext();
         
         var vm = this;
@@ -27,18 +27,7 @@
         
         vm.audioCells = [];
         
-        vm.scaleDefinitions = [
-            {
-                scale: 'minor', 
-                pianoKeys: [49, 51, 52, 54, 56, 57, 59, 61]
-            },
-            {
-                scale: 'major',
-                pianoKeys: [49, 51, 53, 54, 56, 58, 60, 61]
-            }
-        ];
-        
-        vm.scale = getScale(vm.scaleDefinitions[0], -1, 0);
+        vm.scale = scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2);
         
         vm.masterVolume = audioCtx.createGain();
         vm.masterVolume.gain.value = 0.2;
