@@ -90,6 +90,10 @@
             playAudioCells(vm.currentBeat);
         };
         
+        vm.clear = function() {
+            vm.audioCells = [];
+        };
+        
         var lastUpdate = 0;
         function update() {
             vm.currentBeat = (vm.currentBeat + 1);
