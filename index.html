@@ -17,9 +17,9 @@
     </head>
     
     <body>
-        <div id="main-container">
+        <div id="main-container" ng-controller="MainCtrl as mainCtrl">
             <div id="matrix-container">
-                <div id="sequencer-matrix" ng-controller="MainCtrl as mainCtrl">
+                <div id="sequencer-matrix">
                     <table cellspacing="0">
                         <tbody>
                             <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
