@@ -10,8 +10,13 @@
         
         var vm = this;
         
+        vm.Math = window.Math;
+        
         vm.bpm = 160;
         vm.beatDuration = 60 / vm.bpm;
+        
+        vm.bars = 4;
+        vm.beatsPerBar = 4;
         
         vm.beats = 16;
         
@@ -40,7 +45,7 @@
         vm.masterVolume.connect(audioCtx.destination);
         
         vm.getBeats = function() {
-            return new Array(vm.beats);
+            return new Array(vm.bars * vm.beatsPerBar);
         };
         
         vm.toggleAudioCell = function(beat, note) {

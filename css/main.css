@@ -23,6 +23,10 @@ body {
     padding: 5px;
 }
 
+.bar-even {
+    background: #161528;
+}
+
 #sequencer-matrix .cell {
     width: 100%;
     height: 100%;

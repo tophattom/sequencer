@@ -16,11 +16,12 @@
     
     <body>
         <div id="sequencer-matrix" ng-controller="MainCtrl as mainCtrl">
-            <table>
+            <table cellspacing="0">
                 <tbody>
                     <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
                         <td ng-repeat="beat in mainCtrl.getBeats() track by $index"
-                            ng-click="mainCtrl.toggleAudioCell($index, note)">
+                            ng-click="mainCtrl.toggleAudioCell($index, note)"
+                            ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
                             
                             <div class="cell"
                                 ng-class="{'current-beat': $index === mainCtrl.currentBeat,
