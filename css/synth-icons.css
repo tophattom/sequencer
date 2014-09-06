@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'SynthIcons';
+    src: url('fonts/synthicons.woff') format('woff');
+    
+    font-weight: normal;
+    font-style: normal;
+}
+
+.si {
+    display: inline-block;
+    
+    font: normal normal normal 14px/1 SynthIcons;
+    font-size: inherit;
+}
+
+.si-wave-sine:before {
+    content: 's';
+}
+
+.si-wave-square:before {
+    content: 'q';
+}
+
+.si-wave-triangle:before {
+    content: 't';
+}
+
+.si-wave-sawtooth:before {
+    content: 'a';
+}

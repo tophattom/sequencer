@@ -28,6 +28,10 @@ a {
     background: rgba(0, 0, 0, 0.4);
 }
 
+#tools-container .si {
+    font-size: 1.4em;
+}
+
 #matrix-container {
     height: calc(100% - 40px);
 }
