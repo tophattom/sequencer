@@ -148,25 +148,6 @@
             });
         }
         
-        function getScale(scaleDefinition, startOctave, endOctave) {
-            var scale = [];
-            
-            for (var octave = startOctave; octave <= endOctave; octave++) {                
-                scale = scale.concat(scaleDefinition.pianoKeys.map(function(keyNumber, index) {
-                    return Math.pow(2, (keyNumber + 12 * octave - 49) / 12) * 440;
-                }));
-            }
-                        
-            return scale.filter(function(elem, index) {
-                return scale.indexOf(elem) === index;
-            }).map(function(freq, index) {
-                return {
-                    freq: freq,
-                    index: index
-                };
-            });
-        }
-        
         function changeWaveType(newWaveType) {
             vm.audioCells.forEach(function(beat) {
                 beat.forEach(function(cell) {
