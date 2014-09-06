@@ -170,7 +170,9 @@
         function changeWaveType(newWaveType) {
             vm.audioCells.forEach(function(beat) {
                 beat.forEach(function(cell) {
-                    cell.osc.type = newWaveType;
+                    if (cell.osc !== null) {
+                        cell.osc.type = newWaveType;
+                    }
                 });
             });
         }
