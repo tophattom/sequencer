@@ -109,7 +109,8 @@ a.disabled-true {
 }
 
 .control-form input,
-.control-form select {
+.control-form select,
+.control-form button {
     margin: 0;
     
     padding: 2px 6px;
@@ -139,4 +140,8 @@ a.disabled-true {
 
 .control-form input.hidden {
     display: none;
+}
+
+.control-form button:hover {
+    background: rgba(255, 255, 255, 0.4);
 }

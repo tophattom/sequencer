@@ -60,6 +60,13 @@
             }
         };
         
+        vm.generateNewScale = function() {
+            vm.stop();
+            vm.audioCells = [];
+            
+            vm.scale = scaleService.getNotes(vm.newScale.startNote, vm.newScale.key, vm.newScale.octaves);
+        };
+        
         vm.toggleAudioCell = function(beat, note) {
             if (!vm.audioCells[beat]) {
                 vm.audioCells[beat] = [];
