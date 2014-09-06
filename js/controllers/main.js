@@ -35,6 +35,9 @@
         vm.masterVolume.gain.value = 0.2;
         vm.masterVolume.connect(audioCtx.destination);
         
+        var waveTypes = ['sine', 'triangle', 'square', 'sawtooth'];
+        vm.waveType = 'sine';
+        
         vm.newScale = {
             key: 'minor',
             startNote: {
@@ -73,7 +76,7 @@
             }
             
             if (!vm.audioCells[beat][note.index]) {
-                var newCell = new AudioCell(audioCtx, vm.masterVolume, note.freq);
+                var newCell = new AudioCell(audioCtx, vm.masterVolume, note.freq, vm.waveType);
                 vm.audioCells[beat][note.index] = newCell;
             } else {
                 vm.audioCells[beat][note.index] = null;
@@ -86,6 +89,14 @@
             }
             
             return vm.audioCells[beat][note.index] ? vm.audioCells[beat][note.index] : null;
+        };
+        
+        vm.toggleWaveType = function() {
+            var waveIndex = waveTypes.indexOf(vm.waveType);
+            
+            vm.waveType = waveTypes[(waveIndex + 1) % waveTypes.length];
+            
+            changeWaveType(vm.waveType);
         };
         
         vm.stop = function() {
@@ -153,6 +164,14 @@
                     freq: freq,
                     index: index
                 };
+            });
+        }
+        
+        function changeWaveType(newWaveType) {
+            vm.audioCells.forEach(function(beat) {
+                beat.forEach(function(cell) {
+                    cell.osc.type = newWaveType;
+                });
             });
         }
         

@@ -1,13 +1,14 @@
 (function() {
     'use strict';
     
-    var AudioCell = function(ctx, masterGain, frequency, onended) {
+    var AudioCell = function(ctx, masterGain, frequency, waveType, onended) {
         this.audioCtx = ctx;
         
         this.osc = ctx.createOscillator();
         this.gain = ctx.createGain();
         
         this.osc.frequency.value = frequency;
+        this.osc.type = waveType || 'sine';
         this.osc.connect(this.gain);
         
         this.gain.gain.value = 0.0;
