@@ -47,6 +47,8 @@
             octaves: 2
         };
         
+        vm.mouseDown = false;
+        
         vm.bpmChanged = function() {
             vm.stop();
             vm.beatDuration = 60 / vm.bpm;
@@ -80,6 +82,12 @@
                 vm.audioCells[beat][note.index] = newCell;
             } else {
                 vm.audioCells[beat][note.index] = null;
+            }
+        };
+        
+        vm.paintAudioCells = function(beat, note) {
+            if (vm.mouseDown) {
+                vm.toggleAudioCell(beat, note);
             }
         };
         

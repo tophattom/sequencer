@@ -21,12 +21,14 @@
     
     <body>
         <div id="main-container" ng-controller="MainCtrl as mainCtrl">
-            <div id="matrix-container">
+            <div id="matrix-container" ng-mouseleave="mainCtrl.mouseDown = false">
                 <table cellspacing="0" id="sequencer-matrix">
                     <tbody>
                         <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
                             <td ng-repeat="beat in mainCtrl.beats track by $index"
-                                ng-click="mainCtrl.toggleAudioCell($index, note)"
+                                ng-mousedown="mainCtrl.mouseDown = true; mainCtrl.toggleAudioCell($index, note)"
+                                ng-mouseup="mainCtrl.mouseDown = false"
+                                ng-mouseenter="mainCtrl.paintAudioCells($index, note)"
                                 ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
                                 
                                 <div class="cell"
