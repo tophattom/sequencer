@@ -159,7 +159,7 @@
         }
         
         $window.addEventListener('keypress', function(event) {
-            if (event.keyCode === 32) {
+            if (event.keyCode === 32 || event.charCode === 32) {
                 if (vm.playing) {
                     vm.stop();
                 } else {
