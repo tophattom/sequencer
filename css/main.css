@@ -53,6 +53,10 @@ a {
 
 #sequencer-matrix td {
     padding: 5px;
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .bar-even {
