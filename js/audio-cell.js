@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     
-    var AudioCell = function(ctx, masterGain, frequency, waveType, onended) {
+    var AudioCell = function(ctx, destination, frequency, waveType, onended) {
         this.audioCtx = ctx;
         
         this.osc = ctx.createOscillator();
@@ -12,7 +12,7 @@
         this.osc.connect(this.gain);
         
         this.gain.gain.value = 0.0;
-        this.gain.connect(masterGain);
+        this.gain.connect(destination);
         
         this.frequency = frequency;
         
