@@ -62,12 +62,17 @@
             vm.beatCount = vm.bars * vm.beatsPerBar;
             vm.beats = new Array(vm.beatCount);
             
-            vm.currentMatrix.setPageLength(vm.beatCount);
+            vm.matrices.forEach(function(matrix) {
+                matrix.setPageLength(vm.beatCount);
+            });
         };
         
         vm.generateNewScale = function() {
             vm.stop();
-            vm.currentMatrix.clear();
+            
+            vm.matrices.forEach(function(matrix) {
+                matrix.clear();
+            });
             
             vm.scale = scaleService.getNotes(vm.newScale.startNote, vm.newScale.key, vm.newScale.octaves);
         };
@@ -113,7 +118,10 @@
             
             $interval.cancel(vm.player);
             vm.playing = false;
-            vm.currentMatrix.currentBeat = 0;
+            
+            vm.matrices.forEach(function(matrix) {
+                matrix.currentBeat = 0;
+            });
         };
         
         vm.start = function() {
@@ -124,7 +132,10 @@
             vm.playing = true;
             
             vm.player = $interval(update, vm.beatDuration * 1000);
-            vm.currentMatrix.playAudioCells(vm.beatDuration);
+            
+            vm.matrices.forEach(function(matrix) {
+                matrix.playAudioCells(vm.beatDuration);
+            });
         };
         
         vm.clear = function() {
