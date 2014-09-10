@@ -99,7 +99,7 @@
             
             $interval.cancel(vm.player);
             vm.playing = false;
-            vm.currentBeat = 0;
+            vm.currentMatrix.currentBeat = 0;
         };
         
         vm.start = function() {
