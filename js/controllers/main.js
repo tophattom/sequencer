@@ -134,12 +134,15 @@
         
         var lastUpdate = 0;
         function update() {
-            vm.currentMatrix.update(vm.beatDuration);
+            vm.matrices.forEach(function(matrix) {
+                matrix.update(vm.beatDuration);
+            });
             
             var now = window.performance.now();
-            // console.log(now - lastUpdate);
+            console.log(now - lastUpdate - vm.beatDuration * 1000);
             lastUpdate = now;
         }
+        
         $window.addEventListener('keypress', function(event) {
             if (event.keyCode === 32 || event.charCode === 32) {
                 if (vm.playing) {
