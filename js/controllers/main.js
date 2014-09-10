@@ -39,8 +39,7 @@
         vm.scale = scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2);
         
         var waveTypes = ['sine', 'triangle', 'square', 'sawtooth'];
-        vm.waveType = 'sine';
-        
+                
         vm.newScale = {
             key: 'minor',
             startNote: {
@@ -100,11 +99,11 @@
         };
         
         vm.toggleWaveType = function() {
-            var waveIndex = waveTypes.indexOf(vm.waveType);
+            var waveIndex = waveTypes.indexOf(vm.currentMatrix.waveType);
             
-            vm.waveType = waveTypes[(waveIndex + 1) % waveTypes.length];
+            var newWaveType = waveTypes[(waveIndex + 1) % waveTypes.length];
             
-            vm.currentMatrix.setWaveType(vm.waveType);
+            vm.currentMatrix.setWaveType(newWaveType);
         };
         
         vm.stop = function() {
