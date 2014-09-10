@@ -36,6 +36,8 @@ a {
     margin: 0 2.5px;
     padding: 0 10px;
     
+    overflow: hidden;
+    
     align-items: center;
     
     background: rgba(0, 0, 0, 0.4);
@@ -47,6 +49,14 @@ a {
 
 .tab:last-child {
     margin-right: 5px;
+}
+
+.current-tab {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.add-tab {
+    flex-grow: 0;
 }
 
 #tools-container {

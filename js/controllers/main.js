@@ -30,7 +30,10 @@
         vm.playing = false;
         vm.player = null;
                 
-        vm.currentMatrix = new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount);
+        vm.matrices = [
+            new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount)
+        ];
+        vm.currentMatrix = vm.matrices[0];
         
         vm.availableScales = scaleService.getAvailableScales();
         vm.scale = scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2);
@@ -68,6 +71,18 @@
             vm.currentMatrix.clear();
             
             vm.scale = scaleService.getNotes(vm.newScale.startNote, vm.newScale.key, vm.newScale.octaves);
+        };
+        
+        vm.addMatrix = function() {
+            vm.matrices.push(new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount));
+        };
+        
+        vm.deleteMatrix = function(index) {
+            if (vm.matrices.length < 2) {
+                return;
+            }
+            
+            vm.matrices.splice(index, 1);
         };
         
         vm.toggleAudioCell = function(beat, note) {

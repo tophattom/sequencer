@@ -23,9 +23,15 @@
     <body>
         <div id="main-container" ng-controller="MainCtrl as mainCtrl">
             <div id="tabs-container">
-                <div class="tab">
-                    <p>{{mainCtrl.currentMatrix.name}}</p>
-                    <i class="fa fa-times"></i>
+                <div class="tab" ng-class="{'current-tab': matrix === mainCtrl.currentMatrix}" ng-repeat="matrix in mainCtrl.matrices">
+                    <p>{{matrix.name}}</p>
+                    <a href="" ng-click="mainCtrl.deleteMatrix($index)" ng-if="mainCtrl.matrices.length > 1">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                
+                <div class="tab add-tab">
+                    <a href="" ng-click="mainCtrl.addMatrix()"><i class="fa fa-plus"></i></a>
                 </div>
             </div>
             
