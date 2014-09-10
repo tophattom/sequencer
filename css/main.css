@@ -18,6 +18,26 @@ a {
     height: 100%;
 }
 
+#tabs-container {
+    display: flex;
+    justify-content: space-around;
+        
+    height: 40px;
+}
+
+#tabs-container .tab {
+    display: flex;
+    
+    flex-grow: 1;
+    justify-content: space-between;
+    
+    height: 100%;
+    
+    margin-right: 5px;
+    padding: 0 10px;
+    
+    align-items: center;
+}
 
 #tools-container {
     display: flex;
@@ -37,7 +57,7 @@ a {
 }
 
 #matrix-container {
-    height: calc(100% - 40px);
+    height: calc(100% - 40px - 40px);
 }
 
 

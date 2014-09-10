@@ -15,6 +15,8 @@
         this.volume.connect(destination);
         
         this.waveType = 'sine';
+        
+        this.name = 'New matrix';
     };
     
     SequencerMatrix.prototype.addPage = function() {
