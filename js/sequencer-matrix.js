@@ -48,7 +48,14 @@
     };
     
     SequencerMatrix.prototype.setPageLength = function(newLength) {
+        var oldTotalLength = this.pages * this.beatsPerPage,
+            newTotalLength = this.pages * newLength;
+            
+        if (newTotalLength < oldTotalLength) {
+            this.audioCells.splice(newTotalLength, oldTotalLength - newTotalLength);
+        }
         
+        this.beatsPerPage = newLength;
     };
     
     SequencerMatrix.prototype.getAudioCell = function(beat, note) {
@@ -79,15 +86,15 @@
     SequencerMatrix.prototype.update = function(beatDuration) {
         this.currentBeat = (this.currentBeat + 1) % (this.pages * this.beatsPerPage);
         
-        this.playAudioCells(this.currentBeat, beatDuration);
+        this.playAudioCells(beatDuration);
     };
     
-    SequencerMatrix.prototype.playAudioCells = function(beat, beatDuration) {
-        if (!this.audioCells[beat]) {
+    SequencerMatrix.prototype.playAudioCells = function(beatDuration) {
+        if (!this.audioCells[this.currentBeat]) {
             return;
         }
         
-        this.audioCells[beat].forEach(function(cell) {
+        this.audioCells[this.currentBeat].forEach(function(cell) {
             if (cell !== null) {
                 cell.start();
                 cell.stop(beatDuration);

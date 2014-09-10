@@ -5,6 +5,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.js" charset="utf-8"></script>
         
         <script src="js/audio-cell.js" charset="utf-8"></script>
+        <script src="js/sequencer-matrix.js" charset="utf-8"></script>
         
         <script src="js/app.js" charset="utf-8"></script>
         
@@ -32,7 +33,7 @@
                                 ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
                                 
                                 <div class="cell"
-                                    ng-class="{'current-beat': $index === mainCtrl.currentBeat,
+                                    ng-class="{'current-beat': $index === mainCtrl.currentMatrix.currentBeat,
                                         'on': mainCtrl.getAudioCell($index, note) !== null}">
                                     <span class="note-name">{{note.name}}</span>
                                 </div>

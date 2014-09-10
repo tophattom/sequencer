@@ -12,6 +12,10 @@
         
         vm.Math = window.Math;
         
+        vm.masterVolume = audioCtx.createGain();
+        vm.masterVolume.gain.value = 0.2;
+        vm.masterVolume.connect(audioCtx.destination);
+        
         vm.bpm = 160;
         vm.beatDuration = 60 / vm.bpm;
         
@@ -25,15 +29,11 @@
         
         vm.playing = false;
         vm.player = null;
-        
-        vm.audioCells = [];
+                
+        vm.currentMatrix = new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount);
         
         vm.availableScales = scaleService.getAvailableScales();
         vm.scale = scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2);
-        
-        vm.masterVolume = audioCtx.createGain();
-        vm.masterVolume.gain.value = 0.2;
-        vm.masterVolume.connect(audioCtx.destination);
         
         var waveTypes = ['sine', 'triangle', 'square', 'sawtooth'];
         vm.waveType = 'sine';
@@ -60,29 +60,18 @@
             vm.beatCount = vm.bars * vm.beatsPerBar;
             vm.beats = new Array(vm.beatCount);
             
-            if (oldBeatCount > vm.beatCount) {
-                vm.audioCells.splice(vm.beatCount, oldBeatCount - vm.beatCount);
-            }
+            vm.currentMatrix.setPageLength(vm.beatCount);
         };
         
         vm.generateNewScale = function() {
             vm.stop();
-            vm.audioCells = [];
+            vm.currentMatrix.clear();
             
             vm.scale = scaleService.getNotes(vm.newScale.startNote, vm.newScale.key, vm.newScale.octaves);
         };
         
         vm.toggleAudioCell = function(beat, note) {
-            if (!vm.audioCells[beat]) {
-                vm.audioCells[beat] = [];
-            }
-            
-            if (!vm.audioCells[beat][note.index]) {
-                var newCell = new AudioCell(audioCtx, vm.masterVolume, note.freq, vm.waveType);
-                vm.audioCells[beat][note.index] = newCell;
-            } else {
-                vm.audioCells[beat][note.index] = null;
-            }
+            vm.currentMatrix.toggleAudioCell(beat, note);
         };
         
         vm.paintAudioCells = function(beat, note) {
@@ -92,11 +81,7 @@
         };
         
         vm.getAudioCell = function(beat, note) {
-            if (!vm.audioCells[beat]) {
-                return null;
-            }
-            
-            return vm.audioCells[beat][note.index] ? vm.audioCells[beat][note.index] : null;
+            return vm.currentMatrix.getAudioCell(beat, note);
         };
         
         vm.toggleWaveType = function() {
@@ -104,7 +89,7 @@
             
             vm.waveType = waveTypes[(waveIndex + 1) % waveTypes.length];
             
-            changeWaveType(vm.waveType);
+            vm.currentMatrix.setWaveType(vm.waveType);
         };
         
         vm.stop = function() {
@@ -125,47 +110,21 @@
             vm.playing = true;
             
             vm.player = $interval(update, vm.beatDuration * 1000);
-            playAudioCells(vm.currentBeat);
+            vm.currentMatrix.playAudioCells(vm.beatDuration);
         };
         
         vm.clear = function() {
-            vm.audioCells = [];
+            vm.currentMatrix.clear();
         };
         
         var lastUpdate = 0;
         function update() {
-            vm.currentBeat = (vm.currentBeat + 1) % vm.beatCount;
-            
-            playAudioCells(vm.currentBeat);
+            vm.currentMatrix.update(vm.beatDuration);
             
             var now = window.performance.now();
             // console.log(now - lastUpdate);
             lastUpdate = now;
         }
-        
-        function playAudioCells(beat) {
-            if (!vm.audioCells[beat]) {
-                return;
-            }
-            
-            vm.audioCells[beat].forEach(function(cell) {
-                if (cell !== null) {
-                    cell.start();
-                    cell.stop(vm.beatDuration);
-                }
-            });
-        }
-        
-        function changeWaveType(newWaveType) {
-            vm.audioCells.forEach(function(beat) {
-                beat.forEach(function(cell) {
-                    if (cell !== null) {
-                        cell.osc.type = newWaveType;
-                    }
-                });
-            });
-        }
-        
         $window.addEventListener('keypress', function(event) {
             if (event.keyCode === 32 || event.charCode === 32) {
                 if (vm.playing) {
