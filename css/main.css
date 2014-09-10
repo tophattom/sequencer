@@ -25,7 +25,7 @@ a {
     height: 40px;
 }
 
-#tabs-container .tab {
+.tab {
     display: flex;
     
     flex-grow: 1;
@@ -33,10 +33,20 @@ a {
     
     height: 100%;
     
-    margin-right: 5px;
+    margin: 0 2.5px;
     padding: 0 10px;
     
     align-items: center;
+    
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.tab:first-child {
+    margin-left: 5px;
+}
+
+.tab:last-child {
+    margin-right: 5px;
 }
 
 #tools-container {
