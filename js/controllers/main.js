@@ -86,6 +86,14 @@
                 return;
             }
             
+            if (vm.matrices[index] === vm.currentMatrix) {
+                if (index === 0) {
+                    vm.currentMatrix = vm.matrices[1];
+                } else {
+                    vm.currentMatrix = vm.matrices[index - 1];
+                }
+            }
+            
             vm.matrices.splice(index, 1);
         };
         
