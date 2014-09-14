@@ -44,9 +44,9 @@
                     <tbody>
                         <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
                             <td ng-repeat="beat in mainCtrl.beats track by $index"
-                                ng-mousedown="mainCtrl.mouseDown = true; mainCtrl.toggleAudioCell($index, note)"
+                                ng-mousedown="mainCtrl.handleMouseDown($event, $index, note)"
                                 ng-mouseup="mainCtrl.mouseDown = false"
-                                ng-mouseenter="mainCtrl.paintAudioCells($index, note)"
+                                ng-mouseenter="mainCtrl.handleMouseEnter($event, $index, note)"
                                 ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
                                 
                                 <div class="cell"
@@ -54,7 +54,6 @@
                                         'on': mainCtrl.getAudioCell($index, note) !== null}">
                                     <span class="note-name">{{note.name}}</span>
                                 </div>
-                                
                             </td>
                         </tr>
                     </tbody>

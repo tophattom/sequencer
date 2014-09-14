@@ -97,13 +97,15 @@
             vm.matrices.splice(index, 1);
         };
         
-        vm.toggleAudioCell = function(beat, note) {
+        vm.handleMouseDown = function(event, beat, note) {
+            vm.mouseDown = true;
+            
             vm.currentMatrix.toggleAudioCell(beat, note);
         };
         
-        vm.paintAudioCells = function(beat, note) {
+        vm.handleMouseEnter = function(event, beat, note) {
             if (vm.mouseDown) {
-                vm.toggleAudioCell(beat, note);
+                vm.currentMatrix.toggleAudioCell(beat, note);
             }
         };
         
