@@ -42,9 +42,11 @@
         
         this.audioCells.forEach(function(beat) {
             beat.forEach(function(cell) {
-                if (cell !== null) {
-                    cell.osc.type = newWaveType;
-                }
+                cell.forEach(function(subCell) {
+                    if (subCell !== null) {
+                        subCell.osc.type = newWaveType;
+                    }
+                });
             });
         });
     };
