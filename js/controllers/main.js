@@ -109,10 +109,6 @@
             }
         };
         
-        vm.getAudioCell = function(beat, note) {
-            return vm.currentMatrix.getAudioCell(beat, note);
-        };
-        
         vm.toggleWaveType = function() {
             var waveIndex = waveTypes.indexOf(vm.currentMatrix.waveType);
             

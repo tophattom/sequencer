@@ -49,7 +49,7 @@
                                 
                                 <div class="master-cell">
                                     <div class="cell"
-                                        ng-repeat="subCell in mainCtrl.getAudioCell($index, note) track by $index"
+                                        ng-repeat="subCell in mainCtrl.currentMatrix.getAudioCell($index, note) track by $index"
                                         ng-mousedown="mainCtrl.handleMouseDown($event, $parent.$index, note, $index)"
                                         ng-mouseup="mainCtrl.mouseDown = false"
                                         ng-mouseenter="mainCtrl.handleMouseEnter($event, $parent.$index, note, $index)"
