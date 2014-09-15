@@ -91,6 +91,26 @@
         }
     };
     
+    SequencerMatrix.prototype.splitAudioCell = function(beat, note, parts) {
+        if (!this.audioCells[beat]) {
+            this.audioCells[beat] = [];
+        }
+        
+        if (!this.audioCells[beat][note.index]) {
+            this.audioCells[beat][note.index] = [];
+        }
+        
+        var oldLength = this.audioCells[beat][note.index].length;
+        
+        if (parts < oldLength) {
+            return;
+        }
+        
+        for (var i = 0; i < parts - oldLength; i++) {
+            this.audioCells[beat][note.index].push(null);
+        }
+    };
+    
     SequencerMatrix.prototype.update = function(beatDuration) {
         this.currentBeat = (this.currentBeat + 1) % (this.pages * this.beatsPerPage);
         

@@ -99,8 +99,12 @@
         
         vm.handleMouseDown = function(event, beat, note, subBeat) {
             vm.mouseDown = true;
-            
-            vm.currentMatrix.toggleAudioCell(beat, note, subBeat);
+        
+            if (event.altKey) {
+                vm.currentMatrix.splitAudioCell(beat, note, 2);
+            } else {
+                vm.currentMatrix.toggleAudioCell(beat, note, subBeat);
+            }
         };
         
         vm.handleMouseEnter = function(event, beat, note, subBeat) {
