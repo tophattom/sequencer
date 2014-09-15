@@ -101,7 +101,10 @@
             vm.mouseDown = true;
         
             if (event.altKey) {
-                vm.currentMatrix.splitAudioCell(beat, note, 2);
+                var currentParts = vm.currentMatrix.getAudioCell(beat, note).length,
+                    newParts = (((currentParts || 1) + 1) % 5) || 1;
+                
+                vm.currentMatrix.splitAudioCell(beat, note, newParts);
             } else {
                 vm.currentMatrix.toggleAudioCell(beat, note, subBeat);
             }

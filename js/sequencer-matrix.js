@@ -105,11 +105,11 @@
         var oldLength = this.audioCells[beat][note.index].length;
         
         if (parts < oldLength) {
-            return;
-        }
-        
-        for (var i = 0; i < parts - oldLength; i++) {
-            this.audioCells[beat][note.index].push(null);
+            this.audioCells[beat][note.index].splice(parts, oldLength - parts);
+        } else {
+            for (var i = 0; i < parts - oldLength; i++) {
+                this.audioCells[beat][note.index].push(null);
+            }
         }
     };
     
