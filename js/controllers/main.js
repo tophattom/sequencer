@@ -13,7 +13,7 @@
         vm.Math = window.Math;
         
         vm.masterVolume = audioCtx.createGain();
-        vm.masterVolume.gain.value = 0.2;
+        vm.masterVolume.gain.value = 1.0;
         vm.masterVolume.connect(audioCtx.destination);
         
         vm.bpm = 160;
