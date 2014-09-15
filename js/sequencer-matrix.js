@@ -103,10 +103,17 @@
         }
         
         this.audioCells[this.currentBeat].forEach(function(cell) {
-            if (cell !== null) {
-                cell.start();
-                cell.stop(beatDuration);
-            }
+            var subCells = cell.length,
+                subBeatDuration = beatDuration / subCells;
+            
+            cell.forEach(function(subCell, index) {
+                if (subCell !== null) {
+                    var startDelay = subBeatDuration * index;
+                    
+                    subCell.start(startDelay);
+                    subCell.stop(startDelay + subBeatDuration);
+                }
+            });
         });
     };
     

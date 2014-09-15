@@ -44,6 +44,7 @@
                     <tbody>
                         <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
                             <td ng-repeat="beat in mainCtrl.beats track by $index"
+                                ng-mouseup="mainCtrl.mouseDown = false"
                                 ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
                                 
                                 <div class="master-cell">
