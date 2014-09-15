@@ -62,13 +62,15 @@
     
     SequencerMatrix.prototype.getAudioCell = function(beat, note) {
         if (!this.audioCells[beat]) {
-            return null;
+            return [null];
         }
         
-        return this.audioCells[beat][note.index] ? this.audioCells[beat][note.index] : null;
+        return this.audioCells[beat][note.index] ? this.audioCells[beat][note.index] : [null];
     };
     
-    SequencerMatrix.prototype.toggleAudioCell = function(beat, note) {
+    SequencerMatrix.prototype.toggleAudioCell = function(beat, note, subBeat) {
+        subBeat = subBeat || 0;
+        
         if (beat > this.pages * this.beatsPerPage - 1) {
             return;
         }
@@ -78,10 +80,14 @@
         }
         
         if (!this.audioCells[beat][note.index]) {
+            this.audioCells[beat][note.index] = [];
+        }
+        
+        if (!this.audioCells[beat][note.index][subBeat]) {
             var newCell = new AudioCell(this.audioContext, this.volume, note.freq, this.waveType);
-            this.audioCells[beat][note.index] = newCell;
+            this.audioCells[beat][note.index][subBeat] = newCell;
         } else {
-            this.audioCells[beat][note.index] = null;
+            this.audioCells[beat][note.index][subBeat] = null;
         }
     };
     

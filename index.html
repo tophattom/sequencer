@@ -44,16 +44,21 @@
                     <tbody>
                         <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
                             <td ng-repeat="beat in mainCtrl.beats track by $index"
-                                ng-mousedown="mainCtrl.handleMouseDown($event, $index, note)"
-                                ng-mouseup="mainCtrl.mouseDown = false"
-                                ng-mouseenter="mainCtrl.handleMouseEnter($event, $index, note)"
                                 ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
                                 
-                                <div class="cell"
-                                    ng-class="{'current-beat': $index === mainCtrl.currentMatrix.currentBeat,
-                                        'on': mainCtrl.getAudioCell($index, note) !== null}">
-                                    <span class="note-name">{{note.name}}</span>
+                                <div class="master-cell">
+                                    <div class="cell"
+                                        ng-repeat="subCell in mainCtrl.getAudioCell($index, note) track by $index"
+                                        ng-mousedown="mainCtrl.handleMouseDown($event, $parent.$index, note, $index)"
+                                        ng-mouseup="mainCtrl.mouseDown = false"
+                                        ng-mouseenter="mainCtrl.handleMouseEnter($event, $parent.$index, note, $index)"
+                                        ng-class="{'current-beat': $parent.$index === mainCtrl.currentMatrix.currentBeat,
+                                            'on': subCell !== null}">
+                                            
+                                        <span class="note-name">{{note.name}}</span>
+                                    </div>    
                                 </div>
+                                
                             </td>
                         </tr>
                     </tbody>

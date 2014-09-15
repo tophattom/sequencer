@@ -104,9 +104,14 @@ a {
     background: rgba(0, 0, 0, 0.2);
 }
 
-#sequencer-matrix .cell {
-    width: 100%;
+#sequencer-matrix .master-cell {
+    display: flex;
+    
     height: 100%;
+}
+
+#sequencer-matrix .cell {
+    flex-grow: 1;
     
     display: flex;
     
@@ -114,6 +119,14 @@ a {
     justify-content: center;
         
     background: #2E2D4C;
+}
+
+#sequencer-matrix .cell:not(:first-child) {
+    margin-left: 3px;
+}
+
+#sequencer-matrix .cell:not(:last-child) {
+    margin-right: 3px;
 }
 
 #sequencer-matrix .cell.current-beat {
