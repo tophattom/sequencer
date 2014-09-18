@@ -81,12 +81,12 @@
                         
                         <label for="bars">
                             BARS:
-                            <input type="number" id="bars" class="short" ng-model="mainCtrl.bars">    
+                            <input type="number" id="bars" class="short" ng-model="mainCtrl.bars" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">    
                         </label>
                         
                         <label for="beats-per-bar">
                             BEATS / BAR:
-                            <input type="number" id="beats-per-bar" class="short" ng-model="mainCtrl.beatsPerBar">
+                            <input type="number" id="beats-per-bar" class="short" ng-model="mainCtrl.beatsPerBar" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">
                         </label>      
                         
                         <input type="submit" class="hidden">                  
