@@ -28,7 +28,7 @@
                     ng-repeat="matrix in mainCtrl.matrices"
                     ng-click="mainCtrl.currentMatrix = matrix">
                     
-                    <p>{{matrix.name}}</p>
+                    <p ng-model="matrix.name" contenteditable>{{matrix.name}}</p>
                     <a href="" ng-click="mainCtrl.deleteMatrix($index)" ng-if="mainCtrl.matrices.length > 1">
                         <i class="fa fa-times"></i>
                     </a>
