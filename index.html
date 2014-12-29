@@ -74,67 +74,79 @@
                 
                 <div class="control-group">
                     <form class="control-form">
-                        <button>GLOBAL SETTINGS</button>
-                        <button>MATRIX TOOLS</button>
-                        <button>MIXER</button>
+                        <button ng-click="mainCtrl.togglePopup('global')">GLOBAL SETTINGS</button>
+                        <button ng-click="mainCtrl.togglePopup('matrix')">MATRIX TOOLS</button>
+                        <button ng-click="mainCtrl.togglePopup('mixer')">MIXER</button>
                     </form>
-                </div> 
-                <!-- 
-                <div class="control-group">
-                    <form class="control-form" ng-submit="mainCtrl.lengthChanged()">
-                        <label for="bpm">
-                            BPM:
-                            <input type="number" id="bpm" class="short" ng-model="mainCtrl.bpm" ng-change="mainCtrl.bpmChanged()">
-                        </label>
-                        
-                        <label for="bars">
-                            BARS:
-                            <input type="number" id="bars" class="short" ng-model="mainCtrl.bars" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">    
-                        </label>
-                        
-                        <label for="beats-per-bar">
-                            BEATS / BAR:
-                            <input type="number" id="beats-per-bar" class="short" ng-model="mainCtrl.beatsPerBar" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">
-                        </label>      
-                        
-                        <input type="submit" class="hidden">                  
-                    </form>    
                 </div>
                 
-                <div class="control-group">
-                    <form class="control-form" ng-submit="mainCtrl.generateNewScale()">
-                        <label for="scale-key">
-                            SCALE:
-                            <select id="scale-key" ng-model="mainCtrl.newScale.key"
+                <div class="settings-popup" ng-show="mainCtrl.showPopup.global">
+                    <h2>GLOBAL SETTINGS</h2>
+                    
+                    <div class="control-group">
+                        <form class="control-form" ng-submit="mainCtrl.lengthChanged()">
+                            <label for="bpm">
+                                BPM:
+                                <input type="number" id="bpm" class="short" ng-model="mainCtrl.bpm" ng-change="mainCtrl.bpmChanged()">
+                            </label>
+                            
+                            <label for="bars">
+                                BARS:
+                                <input type="number" id="bars" class="short" ng-model="mainCtrl.bars" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">    
+                            </label>
+                            
+                            <label for="beats-per-bar">
+                                BEATS / BAR:
+                                <input type="number" id="beats-per-bar" class="short" ng-model="mainCtrl.beatsPerBar" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">
+                            </label>      
+                            
+                            <input type="submit" class="hidden">                  
+                        </form>    
+                    </div>
+                    
+                    <div class="control-group">
+                        <form class="control-form" ng-submit="mainCtrl.generateNewScale()">
+                            <label for="scale-key">
+                                SCALE:
+                                <select id="scale-key" ng-model="mainCtrl.newScale.key"
                                 ng-options="scale.key as scale.name for scale in mainCtrl.availableScales | orderBy:'name'">
                                 
-                            </select>
-                        </label>
-                        
-                        <label for="scale-start-note-name">
-                            KEY:
-                            <input type="text" id="scale-start-note-name" class="short" ng-model="mainCtrl.newScale.startNote.name" required>
-                        </label>
-                        
-                        <label for="scale-start-note-octave">
-                            OCTAVE:
-                            <input type="number" id="scale-start-note-octave" class="short" ng-model="mainCtrl.newScale.startNote.octave" required>
-                        </label>
-                        
-                        <label for="scale-octaves">
-                            # OCTAVES:
-                            <input type="number" id="scale-octaves" class="short" ng-model="mainCtrl.newScale.octaves">
-                        </label>
-                        
-                        <button type="submit">GENERATE</button>
-                    </form>
+                                </select>
+                            </label>
+                            
+                            <label for="scale-start-note-name">
+                                KEY:
+                                <input type="text" id="scale-start-note-name" class="short" ng-model="mainCtrl.newScale.startNote.name" required>
+                            </label>
+                            
+                            <label for="scale-start-note-octave">
+                                OCTAVE:
+                                <input type="number" id="scale-start-note-octave" class="short" ng-model="mainCtrl.newScale.startNote.octave" required>
+                            </label>
+                            
+                            <label for="scale-octaves">
+                                # OCTAVES:
+                                <input type="number" id="scale-octaves" class="short" ng-model="mainCtrl.newScale.octaves">
+                            </label>
+                            
+                            <button type="submit">GENERATE</button>
+                        </form>
+                    </div>
                 </div>
                 
-                <div class="control-group">
-                    <a href="" ng-click="mainCtrl.toggleWaveType()"><i class="si si-wave-{{mainCtrl.currentMatrix.waveType}}"></i></a>
-                </div> -->
+                <div class="settings-popup" ng-show="mainCtrl.showPopup.matrix">
+                    <h2>MATRIX SETTINGS</h2>
+                    
+                    <div class="control-group">
+                        <a href="" ng-click="mainCtrl.toggleWaveType()"><i class="si si-wave-{{mainCtrl.currentMatrix.waveType}}"></i></a>
+                    </div>
+                    
+                    <a href="" ng-click="mainCtrl.clear()"><i class="fa fa-times fa-2x"></i></a>
+                </div>
                 
-                <a href="" ng-click="mainCtrl.clear()"><i class="fa fa-times fa-2x"></i></a>
+                <div class="settings-popup" ng-show="mainCtrl.showPopup.mixer">
+                    <h2>MIXER</h2>
+                </div>
             </div>
         </div>
     </body>

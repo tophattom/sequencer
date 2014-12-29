@@ -222,3 +222,19 @@ a.disabled-true {
 .control-form button:hover {
     background: rgba(255, 255, 255, 0.4);
 }
+
+.settings-popup {
+    position: absolute;
+    
+    left: 0;
+    bottom: 40px;
+    
+    width: 100%;
+    height: 50vh;
+    
+    padding: 10px 40px;
+    
+    box-sizing: border-box;
+    
+    background: rgba(0, 0, 0, 0.5);
+}

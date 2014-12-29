@@ -35,6 +35,12 @@
         ];
         vm.currentMatrix = vm.matrices[0];
         
+        vm.showPopup = {
+            global: false,
+            matrix: false,
+            mixer: false
+        };
+        
         vm.availableScales = scaleService.getAvailableScales();
         vm.scale = scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2);
         
@@ -50,6 +56,16 @@
         };
         
         vm.mouseDown = false;
+        
+        vm.togglePopup = function(popupKey) {
+            for (var key in vm.showPopup) {
+                if (popupKey === key) {
+                    vm.showPopup[key] = !vm.showPopup[key];
+                } else {
+                    vm.showPopup[key] = false;
+                }
+            }
+        };
         
         vm.bpmChanged = function() {
             vm.stop();
