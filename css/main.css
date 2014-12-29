@@ -238,3 +238,36 @@ a.disabled-true {
     
     background: rgba(0, 0, 0, 0.5);
 }
+
+
+#mixer-popup {
+    display: flex;
+}
+
+.channel-strip {
+    display: flex;
+    
+    flex-direction: column;
+    
+    text-align: center;
+}
+
+.mixer-slider {
+    flex-grow: 1;
+    
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+    background: white;
+}
+
+.mixer-slider::-webkit-slider-thumb {
+    width: 5px;
+    height: 20px;
+    
+    -webkit-appearance: none;
+    background: white;
+}
+
+.mixer-slider:focus {
+    outline: none;
+}
