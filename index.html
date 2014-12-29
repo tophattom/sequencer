@@ -70,8 +70,16 @@
                 <div id="playback-controls" class="control-group">
                     <a href="" ng-click="mainCtrl.start()" ng-class="{'disabled-true': mainCtrl.playing}"><i class="fa fa-play fa-2x"></i></a>
                     <a href="" ng-click="mainCtrl.stop()" ng-class="{'disabled-true': !mainCtrl.playing}"><i class="fa fa-stop fa-2x"></i></a>
-                </div> 
+                </div>
                 
+                <div class="control-group">
+                    <form class="control-form">
+                        <button>GLOBAL SETTINGS</button>
+                        <button>MATRIX TOOLS</button>
+                        <button>MIXER</button>
+                    </form>
+                </div> 
+                <!-- 
                 <div class="control-group">
                     <form class="control-form" ng-submit="mainCtrl.lengthChanged()">
                         <label for="bpm">
@@ -124,7 +132,7 @@
                 
                 <div class="control-group">
                     <a href="" ng-click="mainCtrl.toggleWaveType()"><i class="si si-wave-{{mainCtrl.currentMatrix.waveType}}"></i></a>
-                </div>
+                </div> -->
                 
                 <a href="" ng-click="mainCtrl.clear()"><i class="fa fa-times fa-2x"></i></a>
             </div>
