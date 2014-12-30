@@ -44,7 +44,9 @@
             var now = that.audioCtx.currentTime;
             
             if (that.instrument.attack === 0) {
-                gain.value = 1;
+                gain.cancelScheduledValues(now);
+                gain.setValueAtTime(0, now);
+                gain.linearRampToValueAtTime(1, now + 0.01);
             } else {
                 gain.cancelScheduledValues(now);
                 gain.setValueAtTime(0, now);
@@ -61,7 +63,9 @@
             var now = that.audioCtx.currentTime;
             
             if (that.instrument.release === 0) {
-                gain.value = 0;
+                gain.cancelScheduledValues(now);
+                gain.setValueAtTime(gain.value, now);
+                gain.linearRampToValueAtTime(0, now + 0.01);
             } else {
                 gain.cancelScheduledValues(now);
                 gain.setValueAtTime(gain.value, now);
