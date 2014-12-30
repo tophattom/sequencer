@@ -31,7 +31,7 @@
         vm.player = null;
                 
         vm.matrices = [
-            new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount, InstrumentService.getInstrument('xylosynth', audioCtx))
+            new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount, InstrumentService.getInstrument('sine', audioCtx))
         ];
         vm.currentMatrix = vm.matrices[0];
         

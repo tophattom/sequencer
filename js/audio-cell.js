@@ -46,7 +46,7 @@
             if (that.instrument.attack === 0) {
                 gain.cancelScheduledValues(now);
                 gain.setValueAtTime(0, now);
-                gain.linearRampToValueAtTime(1, now + 0.01);
+                gain.linearRampToValueAtTime(1, now + 0.003);
             } else {
                 gain.cancelScheduledValues(now);
                 gain.setValueAtTime(0, now);
@@ -65,7 +65,7 @@
             if (that.instrument.release === 0) {
                 gain.cancelScheduledValues(now);
                 gain.setValueAtTime(gain.value, now);
-                gain.linearRampToValueAtTime(0, now + 0.01);
+                gain.linearRampToValueAtTime(0, now + 0.003);
             } else {
                 gain.cancelScheduledValues(now);
                 gain.setValueAtTime(gain.value, now);
