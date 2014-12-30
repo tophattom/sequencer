@@ -14,6 +14,9 @@
         this.volume = audioContext.createGain();
         this.volume.connect(destination);
         
+        this.muted = false;
+        this.lastVolume = this.volume.gain.value;
+        
         this.waveType = 'sine';
         
         this.name = 'New matrix';
@@ -137,6 +140,16 @@
                 }
             });
         });
+    };
+    
+    SequencerMatrix.prototype.toggleMute = function () {
+        this.muted = !this.muted;
+        if (this.muted) {
+            this.lastVolume = this.volume.gain.value;
+            this.volume.gain.value = 0;
+        } else {
+            this.volume.gain.value = this.lastVolume;
+        }
     };
     
     window.SequencerMatrix = SequencerMatrix;

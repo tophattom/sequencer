@@ -154,10 +154,22 @@
                         ng-class="{'channel-strip-selected': matrix === mainCtrl.currentMatrix}">
                         <p>{{matrix.name}}</p>
                         
-                        <input type="range" class="mixer-slider" min="-30" max="6" step="0.01" orient="vertical" ng-model="matrix.volume.gain.value" decibel-input>
+                        <input type="range" 
+                            class="mixer-slider" 
+                            min="-30" 
+                            max="6" 
+                            step="0.01"
+                            orient="vertical" 
+                            ng-disabled="matrix.muted"
+                            ng-model="matrix.volume.gain.value" 
+                            decibel-input>
                         
                         <p>{{matrix.volume.gain.value | toDecibels | number:2}} dB</p>
-                        <p class="mute-button"><a href=""><i class="fa fa-volume-up"></i></a></p>
+                        <p class="mute-button">
+                            <a href="" ng-click="matrix.toggleMute()">
+                                <i class="fa" ng-class="{'fa-volume-up': !matrix.muted, 'fa-volume-off': matrix.muted}"></i>
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
