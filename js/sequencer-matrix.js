@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     
-    var SequencerMatrix = function(audioContext, destination, beatsPerPage) {
+    var SequencerMatrix = function(audioContext, destination, beatsPerPage, instrument) {
         this.audioContext = audioContext;
         
         this.audioCells = [];
@@ -17,7 +17,7 @@
         this.muted = false;
         this.lastVolume = this.volume.gain.value;
         
-        this.waveType = 'sine';
+        this.instrument = instrument;
         
         this.name = 'New matrix';
     };
@@ -39,15 +39,15 @@
     SequencerMatrix.prototype.clear = function() {
         this.audioCells = [];
     };
-    
-    SequencerMatrix.prototype.setWaveType = function(newWaveType) {
-        this.waveType = newWaveType;
+
+    SequencerMatrix.prototype.setInstrument = function(instrument) {
+        this.instrument = instrument;
         
         this.audioCells.forEach(function(beat) {
             beat.forEach(function(cell) {
                 cell.forEach(function(subCell) {
                     if (subCell !== null) {
-                        subCell.osc.type = newWaveType;
+                        subCell.setInstrument(instrument);
                     }
                 });
             });
@@ -89,7 +89,7 @@
         }
         
         if (!this.audioCells[beat][note.index][subBeat]) {
-            var newCell = new AudioCell(this.audioContext, this.volume, note.freq, this.waveType);
+            var newCell = new AudioCell(this.audioContext, this.volume, note.freq, this.instrument);
             this.audioCells[beat][note.index][subBeat] = newCell;
         } else {
             this.audioCells[beat][note.index][subBeat] = null;

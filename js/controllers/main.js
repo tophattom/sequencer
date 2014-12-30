@@ -5,7 +5,7 @@
         .controller('MainCtrl', MainCtrl);
         
     /* @ngInject */
-    function MainCtrl($interval, $window, scaleService, toDecibelsFilter) {
+    function MainCtrl($interval, $window, scaleService, InstrumentService, toDecibelsFilter) {
         var audioCtx = new AudioContext();
         
         var vm = this;
@@ -31,7 +31,7 @@
         vm.player = null;
                 
         vm.matrices = [
-            new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount)
+            new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount, InstrumentService.getInstrument('xylosynth', audioCtx))
         ];
         vm.currentMatrix = vm.matrices[0];
         
@@ -94,7 +94,7 @@
         };
         
         vm.addMatrix = function() {
-            vm.matrices.push(new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount));
+            vm.matrices.push(new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount, InstrumentService.getInstrument('xylosynth', audioCtx)));
         };
         
         vm.deleteMatrix = function(index) {
@@ -130,14 +130,6 @@
             if (vm.mouseDown) {
                 vm.currentMatrix.toggleAudioCell(beat, note, subBeat);
             }
-        };
-        
-        vm.toggleWaveType = function() {
-            var waveIndex = waveTypes.indexOf(vm.currentMatrix.waveType);
-            
-            var newWaveType = waveTypes[(waveIndex + 1) % waveTypes.length];
-            
-            vm.currentMatrix.setWaveType(newWaveType);
         };
         
         vm.stop = function() {
