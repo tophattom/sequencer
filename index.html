@@ -11,6 +11,10 @@
         
         <script src="js/services/scale.js" charset="utf-8"></script>
         
+        <script src="js/filters/decibel.filter.js"></script>
+        
+        <script src="js/directives/decibel-input.directive.js"></script>
+        
         <script src="js/controllers/main.js" charset="utf-8"></script>
         
         <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
@@ -145,14 +149,15 @@
                 </div>
                 
                 <div id="mixer-popup" class="settings-popup" ng-show="mainCtrl.showPopup.mixer">
-                    <div class="channel-strip" ng-repeat="matrix in mainCtrl.matrices">
+                    <div class="channel-strip"
+                        ng-repeat="matrix in mainCtrl.matrices"
+                        ng-class="{'channel-strip-selected': matrix === mainCtrl.currentMatrix}">
                         <p>{{matrix.name}}</p>
                         
-                        <input type="range" class="mixer-slider" min="0" max="2" step="0.01" orient="vertical" ng-model="matrix.volume.gain.value">
+                        <input type="range" class="mixer-slider" min="-30" max="6" step="0.01" orient="vertical" ng-model="matrix.volume.gain.value" decibel-input>
                         
-                        <form class="control-form">
-                            <input type="number" class="short" min="0" max="2" step="0.01" ng-model="matrix.volume.gain.value">
-                        </form>
+                        <p>{{matrix.volume.gain.value | toDecibels | number:2}} dB</p>
+                        <p class="mute-button"><a href=""><i class="fa fa-volume-up"></i></a></p>
                     </div>
                 </div>
             </div>

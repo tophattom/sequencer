@@ -232,7 +232,7 @@ a.disabled-true {
     width: 100%;
     height: 50vh;
     
-    padding: 10px 40px;
+    padding: 20px 20px;
     
     box-sizing: border-box;
     
@@ -249,7 +249,19 @@ a.disabled-true {
     
     flex-direction: column;
     
+    margin: 0 5px;
+    
     text-align: center;
+    
+    border: 2px solid white;
+}
+
+.channel-strip p {
+    margin: 5px 0;
+}
+
+.channel-strip-selected {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .mixer-slider {
@@ -270,4 +282,9 @@ a.disabled-true {
 
 .mixer-slider:focus {
     outline: none;
+}
+
+.mute-button {
+    margin: 0;
+    margin-bottom: 5px;
 }

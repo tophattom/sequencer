@@ -5,7 +5,7 @@
         .controller('MainCtrl', MainCtrl);
         
     /* @ngInject */
-    function MainCtrl($interval, $window, scaleService) {
+    function MainCtrl($interval, $window, scaleService, toDecibelsFilter) {
         var audioCtx = new AudioContext();
         
         var vm = this;
