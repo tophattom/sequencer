@@ -169,9 +169,9 @@
                 matrix.update(vm.beatDuration);
             });
             
-            var now = window.performance.now();
-            console.log(now - lastUpdate - vm.beatDuration * 1000);
-            lastUpdate = now;
+            // var now = window.performance.now();
+            // console.log(now - lastUpdate - vm.beatDuration * 1000);
+            // lastUpdate = now;
         }
         
         $window.addEventListener('keypress', function(event) {

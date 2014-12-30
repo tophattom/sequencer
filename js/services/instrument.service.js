@@ -8,24 +8,34 @@
         var instruments = {
             sine: {
                 waveType: 'sine',
-                name: 'Sine wave'
+                name: 'Sine wave',
+                attack: 0,
+                release: 0
             },
             sawtooth: {
                 waveType: 'sawtooth',
-                name: 'Sawtooth wave'
+                name: 'Sawtooth wave',
+                attack: 0,
+                release: 0
             },
             square: {
                 waveType: 'square',
-                name: 'Square wave'
+                name: 'Square wave',
+                attack: 0,
+                release: 0
             },
             triangle: {
                 waveType: 'triangle',
-                name: 'Triangle wave'
+                name: 'Triangle wave',
+                attack: 0,
+                release: 0
             },
             xylosynth: {
                 name: 'Xylosynth',
                 waveType: 'custom',
-                harmonics: [0, 1, 0.3, 0.1, 0.3, 0.1, 0.3]
+                harmonics: [0, 1, 0.3, 0.1, 0.3, 0.1, 0.3],
+                attack: 0.015,
+                release: 0.2
             }
         };
         
