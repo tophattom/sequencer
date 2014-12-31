@@ -36,6 +36,13 @@
                 harmonics: [0, 1, 0.3, 0.1, 0.3, 0.1, 0.3],
                 attack: 0.015,
                 release: 0.2
+            },
+            bass: {
+                name: 'Bass',
+                waveType: 'custom',
+                harmonics: [0, 1, 0.2, 0.3, 0.2, 0.15, 0.1],
+                attack: 0.03,
+                release: 0.7
             }
         };
         

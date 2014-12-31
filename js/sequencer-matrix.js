@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     
-    var SequencerMatrix = function(audioContext, destination, beatsPerPage, instrument) {
+    var SequencerMatrix = function(audioContext, destination, beatsPerPage, scale, instrument) {
         this.audioContext = audioContext;
         
         this.audioCells = [];
@@ -17,6 +17,7 @@
         this.muted = false;
         this.lastVolume = this.volume.gain.value;
         
+        this.scale = scale;
         this.instrument = instrument;
         
         this.name = 'New matrix';

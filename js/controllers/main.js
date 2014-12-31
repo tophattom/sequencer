@@ -31,7 +31,11 @@
         vm.player = null;
                 
         vm.matrices = [
-            new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount, InstrumentService.getInstrument('sine', audioCtx))
+            new SequencerMatrix(audioCtx, 
+                vm.masterVolume, 
+                vm.beatCount, 
+                scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2), 
+                InstrumentService.getInstrument('xylosynth', audioCtx))
         ];
         vm.currentMatrix = vm.matrices[0];
         
@@ -84,17 +88,19 @@
         };
         
         vm.generateNewScale = function() {
-            vm.stop();
+            vm.currentMatrix.clear();
             
-            vm.matrices.forEach(function(matrix) {
-                matrix.clear();
-            });
-            
-            vm.scale = scaleService.getNotes(vm.newScale.startNote, vm.newScale.key, vm.newScale.octaves);
+            vm.currentMatrix.scale = scaleService.getNotes(vm.newScale.startNote, vm.newScale.key, vm.newScale.octaves);
         };
         
         vm.addMatrix = function() {
-            vm.matrices.push(new SequencerMatrix(audioCtx, vm.masterVolume, vm.beatCount, InstrumentService.getInstrument('xylosynth', audioCtx)));
+            var newMatrix = new SequencerMatrix(audioCtx, 
+                vm.masterVolume, 
+                vm.beatCount, 
+                scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2), 
+                InstrumentService.getInstrument('xylosynth', audioCtx));
+            
+            vm.matrices.push(newMatrix);
         };
         
         vm.deleteMatrix = function(index) {

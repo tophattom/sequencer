@@ -47,7 +47,7 @@
             <div id="matrix-container" ng-mouseleave="mainCtrl.mouseDown = false">
                 <table cellspacing="0" id="sequencer-matrix">
                     <tbody>
-                        <tr ng-repeat="note in mainCtrl.scale | orderBy:'freq':true">
+                        <tr ng-repeat="note in mainCtrl.currentMatrix.scale | orderBy:'freq':true">
                             <td ng-repeat="beat in mainCtrl.beats track by $index"
                                 ng-mouseup="mainCtrl.mouseDown = false"
                                 ng-class="{'bar-even': mainCtrl.Math.floor($index / mainCtrl.beatsPerBar) % 2 === 0}">
@@ -108,6 +108,12 @@
                             <input type="submit" class="hidden">                  
                         </form>    
                     </div>
+                </div>
+                
+                <div class="settings-popup" ng-show="mainCtrl.showPopup.matrix">
+                    <h2>MATRIX SETTINGS</h2>
+                    
+                    <a href="" ng-click="mainCtrl.clear()"><i class="fa fa-times fa-2x"></i></a>
                     
                     <div class="control-group">
                         <form class="control-form" ng-submit="mainCtrl.generateNewScale()">
@@ -137,12 +143,6 @@
                             <button type="submit">GENERATE</button>
                         </form>
                     </div>
-                </div>
-                
-                <div class="settings-popup" ng-show="mainCtrl.showPopup.matrix">
-                    <h2>MATRIX SETTINGS</h2>
-                    
-                    <a href="" ng-click="mainCtrl.clear()"><i class="fa fa-times fa-2x"></i></a>
                 </div>
                 
                 <div id="mixer-popup" class="settings-popup" ng-show="mainCtrl.showPopup.mixer">
