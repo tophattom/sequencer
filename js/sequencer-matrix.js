@@ -1,13 +1,14 @@
 (function() {
     'use strict';
     
-    var SequencerMatrix = function(audioContext, destination, beatsPerPage, scale, instrument) {
+    var SequencerMatrix = function(audioContext, destination, beatsPerPage, beatsPerBar, scale, instrument) {
         this.audioContext = audioContext;
         
         this.audioCells = [];
         
         this.pages = 1;
         
+        this.beatsPerBar = beatsPerBar;
         this.beatsPerPage = beatsPerPage;
         this.currentBeat = 0;
         

@@ -10,6 +10,10 @@
         
         var vm = this;
         
+        var defaultBars = 4,
+            defaultBeatsPerBar = 4,
+            defaultBeatCount = defaultBars * defaultBeatsPerBar;
+        
         vm.Math = window.Math;
         
         vm.masterVolume = audioCtx.createGain();
@@ -19,11 +23,11 @@
         vm.bpm = 160;
         vm.beatDuration = 60 / vm.bpm;
         
-        vm.bars = 4;
-        vm.beatsPerBar = 4;
+        vm.newBars = defaultBars;
+        vm.newBeatsPerBar = defaultBeatsPerBar;
         
-        vm.beatCount = vm.bars * vm.beatsPerBar;
-        vm.beats = new Array(vm.beatCount); //Dummy array for ng-repeat
+        vm.beatsPerBar = defaultBeatsPerBar;
+        vm.beats = new Array(defaultBeatCount); //Dummy array for ng-repeat
         
         vm.currentBeat = 0;
         
@@ -33,7 +37,8 @@
         vm.matrices = [
             new SequencerMatrix(audioCtx, 
                 vm.masterVolume, 
-                vm.beatCount, 
+                defaultBeatCount, 
+                defaultBeatsPerBar, 
                 scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2), 
                 InstrumentService.getInstrument('xylosynth', audioCtx))
         ];
@@ -46,9 +51,6 @@
         };
         
         vm.availableScales = scaleService.getAvailableScales();
-        vm.scale = scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2);
-        
-        var waveTypes = ['sine', 'triangle', 'square', 'sawtooth'];
                 
         vm.newScale = {
             key: 'minor',
@@ -71,20 +73,27 @@
             }
         };
         
+        vm.setCurrentMatrix = function(newMatrix) {
+            vm.currentMatrix = newMatrix;
+            
+            vm.beats = new Array(newMatrix.beatsPerPage);
+            vm.beatsPerBar = newMatrix.beatsPerBar;
+        };
+        
         vm.bpmChanged = function() {
             vm.stop();
             vm.beatDuration = 60 / vm.bpm;
         };
         
         vm.lengthChanged = function() {
-            var oldBeatCount = vm.beatCount;
+            var oldBeatCount = vm.currentMatrix.beatsPerPage,
+                newBeatCount = vm.newBars * vm.newBeatsPerBar;
+                
+            vm.currentMatrix.setPageLength(newBeatCount);
+            vm.currentMatrix.beatsPerBar = vm.newBeatsPerBar;
             
-            vm.beatCount = vm.bars * vm.beatsPerBar;
-            vm.beats = new Array(vm.beatCount);
-            
-            vm.matrices.forEach(function(matrix) {
-                matrix.setPageLength(vm.beatCount);
-            });
+            vm.beats = new Array(vm.currentMatrix.beatsPerPage);
+            vm.beatsPerBar = vm.newBeatsPerBar;
         };
         
         vm.generateNewScale = function() {
@@ -96,7 +105,8 @@
         vm.addMatrix = function() {
             var newMatrix = new SequencerMatrix(audioCtx, 
                 vm.masterVolume, 
-                vm.beatCount, 
+                defaultBeatCount, 
+                defaultBeatsPerBar, 
                 scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2), 
                 InstrumentService.getInstrument('xylosynth', audioCtx));
             

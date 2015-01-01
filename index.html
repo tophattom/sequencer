@@ -31,7 +31,7 @@
                 <div class="tab"
                     ng-class="{'current-tab': matrix === mainCtrl.currentMatrix}"
                     ng-repeat="matrix in mainCtrl.matrices"
-                    ng-click="mainCtrl.currentMatrix = matrix">
+                    ng-click="mainCtrl.setCurrentMatrix(matrix)">
                     
                     <p>{{matrix.name}}</p>
                     <a href="" ng-click="mainCtrl.deleteMatrix($index)" ng-if="mainCtrl.matrices.length > 1">
@@ -89,23 +89,11 @@
                     <h2>GLOBAL SETTINGS</h2>
                     
                     <div class="control-group">
-                        <form class="control-form" ng-submit="mainCtrl.lengthChanged()">
+                        <form class="control-form">
                             <label for="bpm">
                                 BPM:
                                 <input type="number" id="bpm" class="short" ng-model="mainCtrl.bpm" ng-change="mainCtrl.bpmChanged()">
-                            </label>
-                            
-                            <label for="bars">
-                                BARS:
-                                <input type="number" id="bars" class="short" ng-model="mainCtrl.bars" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">    
-                            </label>
-                            
-                            <label for="beats-per-bar">
-                                BEATS / BAR:
-                                <input type="number" id="beats-per-bar" class="short" ng-model="mainCtrl.beatsPerBar" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">
-                            </label>      
-                            
-                            <input type="submit" class="hidden">                  
+                            </label>                 
                         </form>    
                     </div>
                 </div>
@@ -142,6 +130,22 @@
                             
                             <button type="submit">GENERATE</button>
                         </form>
+                    </div>
+                    
+                    <div class="control-group">
+                        <form class="control-form" ng-submit="mainCtrl.lengthChanged()">
+                            <label for="bars">
+                                BARS:
+                                <input type="number" id="bars" class="short" ng-model="mainCtrl.newBars" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">    
+                            </label>
+                            
+                            <label for="beats-per-bar">
+                                BEATS / BAR:
+                                <input type="number" id="beats-per-bar" class="short" ng-model="mainCtrl.newBeatsPerBar" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">
+                            </label>      
+                            
+                            <input type="submit" class="hidden">                  
+                        </form>    
                     </div>
                 </div>
                 
