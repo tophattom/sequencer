@@ -230,7 +230,7 @@ a.disabled-true {
     bottom: 40px;
     
     width: 100%;
-    height: 50vh;
+    /* height: 50vh; */
     
     padding: 20px 20px;
     
@@ -242,6 +242,8 @@ a.disabled-true {
 
 #mixer-popup {
     display: flex;
+    
+    height: calc(100% - 80px);
 }
 
 .channel-strip {
