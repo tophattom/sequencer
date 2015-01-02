@@ -9,6 +9,5 @@ so internet connection is required.
 
 ## Browser compatibility
 
-Works best on Chrome, Firefox works too expect for some layout quirks.
-Doesn't work on Safari. IE not tested.
+Works only on Chrome for now.
 
