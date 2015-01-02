@@ -177,15 +177,14 @@ a.disabled-true {
     border-right: 2px solid white;     
 }
 
-
-.control-form {
-    display: inline;
-    
-    margin: 0;
-    padding: 0;
+.control-form legend {
+    color: white;
+    border-bottom: 2px solid white;
 }
 
-.control-form input,
+.control-form input[type=text],
+.control-form input[type=number],
+.control-form input[type=submit],
 .control-form select,
 .control-form button {
     margin: 0;
@@ -206,10 +205,6 @@ a.disabled-true {
     margin-left: 10px;
 }
 
-.control-form label input,
-.control-form label select {
-    margin-left: 5px;
-}
 
 .control-form input.short {
     width: 60px;
@@ -237,6 +232,34 @@ a.disabled-true {
     box-sizing: border-box;
     
     background: rgba(0, 0, 0, 0.5);
+}
+
+.settings-popup-section h3 {
+    margin: 0;
+    padding: .3em 0;
+    margin-bottom: .3em;
+    
+    border-bottom: 2px solid white;
+    
+    font-size: 16px;
+}
+
+#matrix-popup {
+    display: flex;
+    
+    justify-content: space-around;
+}
+
+#matrix-popup > .control-form {
+    flex-grow: 0;
+    flex-shrink: 1;
+    
+    margin: 0 10px;
+}
+
+#instrument-selection {
+    flex-grow: 1;
+    flex-shrink: 0;
 }
 
 

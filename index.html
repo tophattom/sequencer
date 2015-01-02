@@ -20,6 +20,7 @@
         
         <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
         
         <link rel="stylesheet" href="css/synth-icons.css" media="screen" title="no title" charset="utf-8">
         <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
@@ -80,7 +81,7 @@
                 <div class="control-group">
                     <form class="control-form">
                         <button ng-click="mainCtrl.togglePopup('global')">GLOBAL SETTINGS</button>
-                        <button ng-click="mainCtrl.togglePopup('matrix')">MATRIX TOOLS</button>
+                        <button ng-click="mainCtrl.togglePopup('matrix')">MATRIX</button>
                         <button ng-click="mainCtrl.togglePopup('mixer')">MIXER</button>
                     </form>
                 </div>
@@ -98,55 +99,69 @@
                     </div>
                 </div>
                 
-                <div class="settings-popup" ng-show="mainCtrl.showPopup.matrix">
-                    <h2>MATRIX SETTINGS</h2>
+                <div id="matrix-popup" class="settings-popup" ng-show="mainCtrl.showPopup.matrix">
+                    <div id="instrument-selection" class="settings-popup-section">
+                        <h3>INSTRUMENT</h3>
+                    </div>
                     
-                    <a href="" ng-click="mainCtrl.clear()"><i class="fa fa-times fa-2x"></i></a>
-                    
-                    <div class="control-group">
-                        <form class="control-form" ng-submit="mainCtrl.generateNewScale()">
-                            <label for="scale-key">
-                                SCALE:
+                    <form class="pure-form pure-form-aligned control-form" ng-submit="mainCtrl.generateNewScale()">
+                        <fieldset>
+                            <legend>GENERATE SCALE</legend>
+                            
+                            <div class="pure-control-group">
+                                <label for="scale-key">SCALE:</label>
                                 <select id="scale-key" ng-model="mainCtrl.newScale.key"
-                                ng-options="scale.key as scale.name for scale in mainCtrl.availableScales | orderBy:'name'">
-                                
+                                    ng-options="scale.key as scale.name for scale in mainCtrl.availableScales | orderBy:'name'">
+                                    
                                 </select>
-                            </label>
+                            </div>
                             
-                            <label for="scale-start-note-name">
-                                KEY:
+                            <div class="pure-control-group">
+                                <label for="scale-start-note-name">KEY:</label>
                                 <input type="text" id="scale-start-note-name" class="short" ng-model="mainCtrl.newScale.startNote.name" required>
-                            </label>
+                            </div>
                             
-                            <label for="scale-start-note-octave">
-                                OCTAVE:
+                            <div class="pure-control-group">
+                                <label for="scale-start-note-octave">OCTAVE:</label>
                                 <input type="number" id="scale-start-note-octave" class="short" ng-model="mainCtrl.newScale.startNote.octave" required>
-                            </label>
+                            </div>
                             
-                            <label for="scale-octaves">
-                                # OCTAVES:
+                            <div class="pure-control-group">
+                                <label for="scale-octaves"># OCTAVES:</label>
                                 <input type="number" id="scale-octaves" class="short" ng-model="mainCtrl.newScale.octaves">
-                            </label>
+                            </div>
                             
-                            <button type="submit">GENERATE</button>
-                        </form>
-                    </div>
-                    
-                    <div class="control-group">
-                        <form class="control-form" ng-submit="mainCtrl.lengthChanged()">
-                            <label for="bars">
-                                BARS:
+                            <div class="pure-controls">
+                                <button type="submit">GENERATE</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                
+                    <form class="pure-form pure-form-aligned control-form" ng-submit="mainCtrl.lengthChanged()">
+                        <fieldset>
+                            <legend>PAGE SIZE</legend>
+                            
+                            <div class="pure-control-group">
+                                <label for="bars">BARS:</label>
                                 <input type="number" id="bars" class="short" ng-model="mainCtrl.newBars" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">    
-                            </label>
+                            </div>
                             
-                            <label for="beats-per-bar">
-                                BEATS / BAR:
+                            <div class="pure-control-group">
+                                <label for="beats-per-bar">BEATS / BAR:</label>
                                 <input type="number" id="beats-per-bar" class="short" ng-model="mainCtrl.newBeatsPerBar" ng-model-options="{updateOn: 'blur'}" ng-change="mainCtrl.lengthChanged()">
-                            </label>      
+                            </div>
                             
-                            <input type="submit" class="hidden">                  
-                        </form>    
-                    </div>
+                            <input type="submit" class="hidden">
+                        </fieldset>
+                    </form>    
+                    
+                    <form class="pure-form pure-form-stacked control-form">
+                        <fieldset>
+                            <legend>MISC.</legend>
+                            
+                            <button ng-click="mainCtrl.clear()">CLEAR</button>
+                        </fieldset>
+                    </form>
                 </div>
                 
                 <div id="mixer-popup" class="settings-popup" ng-show="mainCtrl.showPopup.mixer">
