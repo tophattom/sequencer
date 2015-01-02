@@ -26,9 +26,12 @@
         this.frequency = frequency;
         
         this.osc.start();
+        
+        this.lastHit = 0;
     };
     
     AudioCell.prototype.setInstrument = function (instrument) {
+        this.instrument = instrument;
         this.osc.type = instrument.waveType;
         
         if (instrument.waveType === 'custom') {
@@ -40,11 +43,14 @@
         var gain = this.gain.gain,
             startTime = currentTime + delay;
             
+        this.lastHit = startTime;
+            
         gain.cancelScheduledValues(startTime);
         gain.setValueAtTime(0, startTime);
         
         if (this.instrument.attack === 0) {
             gain.linearRampToValueAtTime(1, startTime + 0.001);
+            // gain.setValueAtTime(1, startTime);
         } else {
             gain.linearRampToValueAtTime(1, startTime + this.instrument.attack);
         }
@@ -53,6 +59,11 @@
     AudioCell.prototype.stop = function(currentTime, delay) {
         var gain = this.gain.gain,
             startTime = currentTime + delay;
+            
+        var diff = startTime - this.lastHit,
+            currentValue = Math.min(1, diff / this.instrument.attack);
+        
+        gain.setValueAtTime(currentValue, startTime);
         
         if (this.instrument.release === 0) {
             gain.linearRampToValueAtTime(0, startTime + 0.001);

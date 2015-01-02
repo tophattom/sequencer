@@ -40,7 +40,7 @@
                 defaultBeatCount, 
                 defaultBeatsPerBar, 
                 scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2), 
-                InstrumentService.getInstrument('xylosynth', audioCtx))
+                InstrumentService.getInstrument('sine', audioCtx))
         ];
         vm.currentMatrix = vm.matrices[0];
         
@@ -51,6 +51,7 @@
         };
         
         vm.availableScales = scaleService.getAvailableScales();
+        vm.availableInstruments = InstrumentService.getAvailableInstruments();
                 
         vm.newScale = {
             key: 'minor',
@@ -100,6 +101,14 @@
             vm.currentMatrix.clear();
             
             vm.currentMatrix.scale = scaleService.getNotes(vm.newScale.startNote, vm.newScale.key, vm.newScale.octaves);
+        };
+        
+        vm.currentInstrument = function(newInstrumentKey) {
+            if (angular.isDefined(newInstrumentKey)) {
+                vm.currentMatrix.setInstrument(InstrumentService.getInstrument(newInstrumentKey, audioCtx));
+            }
+            
+            return vm.currentMatrix.instrument.instrumentKey;
         };
         
         vm.addMatrix = function() {

@@ -260,6 +260,8 @@ a.disabled-true {
 #instrument-selection {
     flex-grow: 1;
     flex-shrink: 0;
+    
+    margin: 0 10px;
 }
 
 

@@ -47,24 +47,27 @@
         };
         
         var service = {
-            getAvailableInstuments: getAvailableInstuments,
+            getAvailableInstruments: getAvailableInstruments,
             getInstrument: getInstrument
         };
         
-        function getAvailableInstuments() {
+        function getAvailableInstruments() {
             return Object.keys(instruments).map(function(instrumentKey) {
                 return {
                     instrumentKey: instrumentKey,
-                    name: instruments[instrumentKey]
+                    name: instruments[instrumentKey].name
                 };
             });
         }
         
         function getInstrument(instrumentKey, audioCtx) {
-            var instrument = instruments[instrumentKey];
+            var instrument = instruments[instrumentKey],
+                finalInstrument = angular.copy(instrument);
+                
+            finalInstrument.instrumentKey = instrumentKey;
             
             if (instrument.waveType !== 'custom') {
-                return angular.copy(instrument);
+                return finalInstrument;
             } else {
                 var real = new Float32Array(instrument.harmonics.length);
                     
@@ -72,8 +75,7 @@
                     real[i] = instrument.harmonics[i];
                 }
                 
-                var waveform = audioCtx.createPeriodicWave(real, new Float32Array(instrument.harmonics.length)),
-                    finalInstrument = angular.copy(instrument);
+                var waveform = audioCtx.createPeriodicWave(real, new Float32Array(instrument.harmonics.length));
                 
                 finalInstrument.waveform = waveform;
                 

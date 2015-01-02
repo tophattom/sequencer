@@ -102,6 +102,16 @@
                 <div id="matrix-popup" class="settings-popup" ng-show="mainCtrl.showPopup.matrix">
                     <div id="instrument-selection" class="settings-popup-section">
                         <h3>INSTRUMENT</h3>
+                        
+                        <form class="pure-form control-form">
+                            <label for="matrix-instrument">PRESET:</label>
+                            <select id="matrix-instrument" 
+                                ng-model="mainCtrl.currentInstrument" 
+                                ng-model-options="{getterSetter: true}"
+                                ng-options="instrument.instrumentKey as instrument.name for instrument in mainCtrl.availableInstruments | orderBy:'name'">
+                                
+                            </select>
+                        </form>
                     </div>
                     
                     <form class="pure-form pure-form-aligned control-form" ng-submit="mainCtrl.generateNewScale()">

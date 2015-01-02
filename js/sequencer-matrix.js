@@ -129,19 +129,19 @@
             return;
         }
         
-        var that = this;
+        var now = this.audioContext.currentTime,
+            instrument = this.instrument;
         
         this.audioCells[this.currentBeat].forEach(function(cell) {
             var subCells = cell.length,
-                subBeatDuration = (beatDuration / subCells),
-                now = that.audioContext.currentTime;
-            
+                subBeatDuration = (beatDuration / subCells);
+                
             cell.forEach(function(subCell, index) {
                 if (subCell !== null) {
                     var startDelay = subBeatDuration * index;
                     
                     subCell.start(now, startDelay);
-                    subCell.stop(now, startDelay + subBeatDuration * 0.9);
+                    subCell.stop(now, startDelay + Math.max(subBeatDuration * 0.9, instrument.attack));
                 }
             });
         });
