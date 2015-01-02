@@ -36,42 +36,29 @@
         }
     };
     
-    AudioCell.prototype.start = function(delay) {
-        var that = this,
-            gain = this.gain.gain;
+    AudioCell.prototype.start = function(currentTime, delay) {
+        var gain = this.gain.gain,
+            startTime = currentTime + delay;
             
-        setTimeout(function() {
-            var now = that.audioCtx.currentTime;
-            
-            if (that.instrument.attack === 0) {
-                gain.cancelScheduledValues(now);
-                gain.setValueAtTime(0, now);
-                gain.linearRampToValueAtTime(1, now + 0.003);
-            } else {
-                gain.cancelScheduledValues(now);
-                gain.setValueAtTime(0, now);
-                gain.linearRampToValueAtTime(1, now + that.instrument.attack);
-            }
-        }, delay * 1000);
+        gain.cancelScheduledValues(startTime);
+        gain.setValueAtTime(0, startTime);
+        
+        if (this.instrument.attack === 0) {
+            gain.linearRampToValueAtTime(1, startTime + 0.001);
+        } else {
+            gain.linearRampToValueAtTime(1, startTime + this.instrument.attack);
+        }
     };
     
-    AudioCell.prototype.stop = function(delay) {
-        var that = this,
-            gain = this.gain.gain;
-            
-        setTimeout(function() {
-            var now = that.audioCtx.currentTime;
-            
-            if (that.instrument.release === 0) {
-                gain.cancelScheduledValues(now);
-                gain.setValueAtTime(gain.value, now);
-                gain.linearRampToValueAtTime(0, now + 0.003);
-            } else {
-                gain.cancelScheduledValues(now);
-                gain.setValueAtTime(gain.value, now);
-                gain.linearRampToValueAtTime(0, now + that.instrument.release);
-            }
-        }, delay * 1000);
+    AudioCell.prototype.stop = function(currentTime, delay) {
+        var gain = this.gain.gain,
+            startTime = currentTime + delay;
+        
+        if (this.instrument.release === 0) {
+            gain.linearRampToValueAtTime(0, startTime + 0.001);
+        } else {
+            gain.linearRampToValueAtTime(0, startTime + this.instrument.release);
+        }
     };
     
     window.AudioCell = AudioCell;
