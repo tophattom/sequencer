@@ -207,7 +207,7 @@ a.disabled-true {
 
 
 .control-form input.short {
-    width: 60px;
+    width: 70px;
 }
 
 .control-form input.hidden {
@@ -237,7 +237,7 @@ a.disabled-true {
 .settings-popup-section h3 {
     margin: 0;
     padding: .3em 0;
-    margin-bottom: .3em;
+    margin-bottom: .5em;
     
     border-bottom: 2px solid white;
     
@@ -262,6 +262,27 @@ a.disabled-true {
     flex-shrink: 0;
     
     margin: 0 10px;
+}
+
+#adsr-envelope {
+    flex-grow: 1;
+    flex-shrink: 0;
+    
+    margin: 10px 0;
+    
+    border: 2px solid white;
+}
+
+#adsr-envelope polyline {
+    stroke: white;
+    stroke-width: 1px;
+    
+    fill: none;
+}
+
+#adsr-control {
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 
@@ -314,4 +335,9 @@ a.disabled-true {
 .mute-button {
     margin: 0;
     margin-bottom: 5px;
+}
+
+
+.flex-container {
+    display: flex;
 }

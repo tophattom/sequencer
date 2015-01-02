@@ -40,7 +40,7 @@
                 defaultBeatCount, 
                 defaultBeatsPerBar, 
                 scaleService.getNotes({name: 'A', octave: 3}, 'minor', 2), 
-                InstrumentService.getInstrument('sine', audioCtx))
+                InstrumentService.getInstrument('xylosynth', audioCtx))
         ];
         vm.currentMatrix = vm.matrices[0];
         

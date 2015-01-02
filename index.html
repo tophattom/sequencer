@@ -101,17 +101,54 @@
                 
                 <div id="matrix-popup" class="settings-popup" ng-show="mainCtrl.showPopup.matrix">
                     <div id="instrument-selection" class="settings-popup-section">
-                        <h3>INSTRUMENT</h3>
-                        
                         <form class="pure-form control-form">
-                            <label for="matrix-instrument">PRESET:</label>
-                            <select id="matrix-instrument" 
-                                ng-model="mainCtrl.currentInstrument" 
-                                ng-model-options="{getterSetter: true}"
-                                ng-options="instrument.instrumentKey as instrument.name for instrument in mainCtrl.availableInstruments | orderBy:'name'">
-                                
-                            </select>
+                            <fieldset>
+                                <legend>INSTRUMENT</legend>
+                                <label for="matrix-instrument">PRESET:</label>
+                                <select id="matrix-instrument" 
+                                    ng-model="mainCtrl.currentInstrument" 
+                                    ng-model-options="{getterSetter: true}"
+                                    ng-options="instrument.instrumentKey as instrument.name for instrument in mainCtrl.availableInstruments | orderBy:'name'">
+                                    
+                                </select>
+                            </fieldset>
                         </form>
+                        
+                        <div class="flex-container">
+                            <svg id="adsr-envelope" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <polyline 
+                                    ng-attr-points=
+                                        "0,100 
+                                        {{90 * mainCtrl.currentMatrix.instrument.attack / (mainCtrl.currentMatrix.instrument.attack + mainCtrl.currentMatrix.instrument.decay + mainCtrl.currentMatrix.instrument.release)}},0 
+                                        {{90 * (mainCtrl.currentMatrix.instrument.attack + mainCtrl.currentMatrix.instrument.decay) / (mainCtrl.currentMatrix.instrument.attack + mainCtrl.currentMatrix.instrument.decay + mainCtrl.currentMatrix.instrument.release)}},{{100 - 100 * mainCtrl.currentMatrix.instrument.sustain}} 
+                                        {{10 + 90 * (mainCtrl.currentMatrix.instrument.attack + mainCtrl.currentMatrix.instrument.decay) / (mainCtrl.currentMatrix.instrument.attack + mainCtrl.currentMatrix.instrument.decay + mainCtrl.currentMatrix.instrument.release)}},{{100 - 100 * mainCtrl.currentMatrix.instrument.sustain}}  
+                                        100,100" />
+                            </svg>
+                            
+                            <form id="adsr-control" class="pure-form pure-form-aligned control-form">
+                                <fieldset>
+                                    <div class="pure-control-group">
+                                        <label for="instrument-attack">ATTACK:</label>
+                                        <input type="number" id="instrument-attack" class="short" min="0" step="0.001" ng-model="mainCtrl.currentMatrix.instrument.attack">
+                                    </div>
+                                    
+                                    <div class="pure-control-group">
+                                        <label for="instrument-decay">DECAY:</label>
+                                        <input type="number" id="instrument-decay" class="short" min="0" step="0.001" ng-model="mainCtrl.currentMatrix.instrument.decay">
+                                    </div>
+                                    
+                                    <div class="pure-control-group">
+                                        <label for="instrument-sustain">SUSTAIN:</label>
+                                        <input type="number" id="instrument-sustain" class="short" min="0" max="1" step="0.01" ng-model="mainCtrl.currentMatrix.instrument.sustain">
+                                    </div>
+                                    
+                                    <div class="pure-control-group">
+                                        <label for="instrument-release">RELEASE:</label>
+                                        <input type="number" id="instrument-release" class="short" min="0" step="0.001" ng-model="mainCtrl.currentMatrix.instrument.release">
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
                     
                     <form class="pure-form pure-form-aligned control-form" ng-submit="mainCtrl.generateNewScale()">

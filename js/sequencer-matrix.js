@@ -141,7 +141,7 @@
                     var startDelay = subBeatDuration * index;
                     
                     subCell.start(now, startDelay);
-                    subCell.stop(now, startDelay + Math.max(subBeatDuration * 0.9, instrument.attack));
+                    subCell.stop(now, startDelay + Math.max(subBeatDuration * 0.9, instrument.attack + instrument.decay));
                 }
             });
         });

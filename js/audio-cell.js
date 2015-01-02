@@ -48,28 +48,19 @@
         gain.cancelScheduledValues(startTime);
         gain.setValueAtTime(0, startTime);
         
-        if (this.instrument.attack === 0) {
-            gain.linearRampToValueAtTime(1, startTime + 0.001);
-            // gain.setValueAtTime(1, startTime);
-        } else {
-            gain.linearRampToValueAtTime(1, startTime + this.instrument.attack);
-        }
+        var attack = Math.max(0.001, this.instrument.attack),
+            decay = Math.max(0.001, this.instrument.decay);
+            
+        gain.linearRampToValueAtTime(1, startTime + attack);
+        gain.linearRampToValueAtTime(this.instrument.sustain, startTime + attack + decay);
     };
     
     AudioCell.prototype.stop = function(currentTime, delay) {
         var gain = this.gain.gain,
             startTime = currentTime + delay;
-            
-        var diff = startTime - this.lastHit,
-            currentValue = Math.min(1, diff / this.instrument.attack);
         
-        gain.setValueAtTime(currentValue, startTime);
-        
-        if (this.instrument.release === 0) {
-            gain.linearRampToValueAtTime(0, startTime + 0.001);
-        } else {
-            gain.linearRampToValueAtTime(0, startTime + this.instrument.release);
-        }
+        gain.setValueAtTime(this.instrument.sustain, startTime);
+        gain.linearRampToValueAtTime(0, startTime + Math.max(0.001, this.instrument.release));
     };
     
     window.AudioCell = AudioCell;
