@@ -9,5 +9,5 @@ so internet connection is required.
 
 ## Browser compatibility
 
-Works only on Chrome for now.
+Works on Chrome and Firefox. Probably doesn't work on other browsers for now.
 
