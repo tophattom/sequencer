@@ -95,7 +95,7 @@ a {
 
 #sequencer-matrix {
     width: 100vw;
-    height: calc(100% - 80px);
+    height: calc(100vh - 80px);
     
     margin: 0;
     padding: 0;
@@ -265,6 +265,8 @@ a.disabled-true {
 }
 
 #adsr-envelope {
+    height: 150px;
+    
     flex-grow: 1;
     flex-shrink: 0;
     
