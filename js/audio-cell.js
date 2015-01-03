@@ -13,10 +13,10 @@
         this.instrument = instrument;
         
         if (instrument) {
-            this.osc.type = instrument.waveType;
-            
             if (instrument.waveType === 'custom') {
                 this.osc.setPeriodicWave(instrument.waveform);
+            } else {
+                this.osc.type = instrument.waveType;
             }
         }
         
