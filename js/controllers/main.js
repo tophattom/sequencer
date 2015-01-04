@@ -6,7 +6,8 @@
         
     /* @ngInject */
     function MainCtrl($interval, $window, scaleService, InstrumentService, toDecibelsFilter) {
-        var audioCtx = new AudioContext();
+        var AudioContext = window.AudioContext || window.webkitAudioContext,
+            audioCtx = new AudioContext();
         
         var vm = this;
         

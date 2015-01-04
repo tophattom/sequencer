@@ -25,7 +25,7 @@
         
         this.frequency = frequency;
         
-        this.osc.start();
+        this.osc.start(0);
         
         this.lastHit = 0;
     };
