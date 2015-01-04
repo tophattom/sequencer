@@ -9,5 +9,5 @@ so internet connection is required.
 
 ## Browser compatibility
 
-Works on Chrome and Firefox. Probably doesn't work on other browsers for now.
+Works on all browsers that support Web Audio API (all but IE). CSS still needs prefixing for the layout to work correctly in Safari.
 
