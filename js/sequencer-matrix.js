@@ -13,10 +13,25 @@
         this.currentBeat = 0;
         
         this.volume = audioContext.createGain();
-        this.volume.connect(destination);
+        // this.volume.connect(destination);
+        
+        this.leftGain = audioContext.createGain();
+        this.rightGain = audioContext.createGain();
+        
+        this.merger = audioContext.createChannelMerger(2);
+        
+        this.volume.connect(this.leftGain);
+        this.volume.connect(this.rightGain);
+        
+        this.leftGain.connect(this.merger, 0, 0);
+        this.rightGain.connect(this.merger, 0, 1);
+        
+        this.merger.connect(destination);
         
         this.muted = false;
         this.lastVolume = this.volume.gain.value;
+        
+        this.pan = 0;
         
         this.scale = scale;
         this.instrument = instrument;
@@ -155,6 +170,13 @@
         } else {
             this.volume.gain.value = this.lastVolume;
         }
+    };
+    
+    SequencerMatrix.prototype.updatePanGains = function () {
+        this.pan = Math.max(-1, Math.min(1, this.pan));
+        
+        this.leftGain.gain.value = Math.max(0, Math.min(1, 1 - this.pan));
+        this.rightGain.gain.value = Math.max(0, Math.min(1, 1 + this.pan));
     };
     
     window.SequencerMatrix = SequencerMatrix;

@@ -233,6 +233,14 @@
                                 <i class="fa" ng-class="{'fa-volume-up': !matrix.muted, 'fa-volume-off': matrix.muted}"></i>
                             </a>
                         </p>
+                        
+                        <input type="range"
+                            min="-1"
+                            max="1"
+                            step="0.01"
+                            ng-model="matrix.pan"
+                            ng-change="matrix.updatePanGains()"
+                            ng-dblclick="matrix.pan = 0; matrix.updatePanGains()">
                     </div>
                 </div>
             </div>
