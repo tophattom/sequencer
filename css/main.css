@@ -294,6 +294,13 @@ a.disabled-true {
     height: calc(100% - 80px);
 }
 
+#master-channel {
+    margin-left: auto;
+    
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
 .channel-strip {
     display: flex;
     

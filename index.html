@@ -242,6 +242,21 @@
                             ng-change="matrix.updatePanGains()"
                             ng-dblclick="matrix.pan = 0; matrix.updatePanGains()">
                     </div>
+                    
+                    <div id="master-channel" class="channel-strip">
+                        <p>MASTER</p>
+                        
+                        <input type="range" 
+                        class="mixer-slider" 
+                        min="-30" 
+                        max="6" 
+                        step="0.01"
+                        orient="vertical" 
+                        ng-model="mainCtrl.masterVolume.gain.value" 
+                        decibel-input>
+                        
+                        <p>{{mainCtrl.masterVolume.gain.value | toDecibels | number:2}} dB</p>
+                    </div>
                 </div>
             </div>
         </div>
